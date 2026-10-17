@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zhifang Guo - Homepage</title>
+  <meta name="description" content="Zhifang Guo, Multimodal Algorithm Researcher at Alibaba Qwen Team. Audio understanding and omni-modal foundation models.">
+  <link rel="icon" href="https://github.com/965694547.png?size=64">
+  <style>
+    :root {
+      --link: #224b8d;
+      --link-hover: #22b3eb;
+      --text: #30343f;
+      --muted: #586e75;
+      --line: #efefef;
+      --tag-blue: #eaf1fb;
+      --tag-gray: #f2f3f3;
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 15px; background: #fff; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+    ::selection { color: #fff; background: #000; }
+
+    /* ---------- masthead ---------- */
+    .masthead {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(6px);
+    }
+    .masthead-inner {
+      max-width: 1150px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .masthead .brand {
+      font-weight: 700; color: var(--text); font-size: 1.05rem;
+      padding: 14px 10px; letter-spacing: .2px;
+    }
+    .masthead nav { margin-left: auto; display: flex; flex-wrap: wrap; }
+    .masthead nav a {
+      padding: 14px 12px; color: var(--muted); font-size: .95rem;
+    }
+    .masthead nav a:hover { color: var(--text); text-decoration: none; }
+    .masthead nav a.active { color: var(--text); font-weight: 700; }
+
+    /* ---------- layout ---------- */
+    .wrap { max-width: 1150px; margin: 0 auto; padding: 0 24px; display: flex; gap: 40px; }
+    .sidebar { width: 250px; flex: none; }
+    .sidebar-inner { position: sticky; top: 72px; padding: 40px 0 24px; text-align: center; }
+    .content { flex: 1; min-width: 0; padding-bottom: 80px; }
+    section { padding-top: 28px; scroll-margin-top: 80px; }
+    h2 {
+      font-size: 1.5rem; margin: 0 0 14px; color: var(--text);
+      border-bottom: 2px solid var(--tag-blue); display: inline-block; padding-bottom: 4px;
+    }
+
+    /* ---------- sidebar ---------- */
+    .avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 14px; }
+    .author-name { font-size: 1.55rem; font-weight: 700; color: var(--text); margin: 0 0 6px; }
+    .author-name .cn { font-size: 1.15rem; color: var(--muted); font-weight: 500; }
+    .focus-line { color: var(--muted); font-size: .95rem; margin: 0 18px 18px; }
+    .side-links { list-style: none; margin: 0; padding: 0; text-align: left; }
+    .side-links li { padding: 5px 0; font-size: .95rem; display: flex; align-items: center; gap: 9px; }
+    .side-links svg { width: 16px; height: 16px; flex: none; }
+    .side-links svg.stroke { fill: none; stroke: var(--muted); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .side-links svg.fill { fill: var(--muted); }
+    .side-links a { color: var(--muted); }
+    .side-links a:hover { color: var(--link); }
+    .badges { margin-top: 18px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+    .badges img { display: block; }
+
+    /* ---------- about ---------- */
+    .about p { margin: 0 0 14px; }
+    .stat-num { font-weight: 700; color: var(--text); }
+
+    /* ---------- news ---------- */
+    .news { list-style: none; margin: 0; padding: 0; }
+    .news li { padding: 4px 0; }
+    .news .date { font-weight: 600; color: var(--muted); margin-right: 8px; }
+
+    /* ---------- publications ---------- */
+    .pub-group { margin-bottom: 26px; }
+    .pub-group h3 { font-size: 1.15rem; margin: 0 0 8px; color: var(--muted); font-weight: 600; }
+    .pub { list-style: none; margin: 0; padding: 0; }
+    .pub li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .pub-title { font-weight: 600; color: var(--text); }
+    .pub-title:hover { color: var(--link-hover); }
+    .authors { display: block; font-size: .92rem; color: var(--muted); margin-top: 2px; }
+    .authors .me { font-weight: 700; color: var(--text); }
+    .tag {
+      display: inline-block; padding: 1px 9px; border-radius: 12px;
+      font-size: .78rem; margin-left: 6px; vertical-align: 1px;
+    }
+    .tag-venue { background: var(--tag-blue); color: var(--link); font-weight: 600; }
+    .tag-ccf { background: var(--tag-gray); color: var(--muted); }
+    .tag-oral { background: #fdf1e3; color: #b05e00; font-weight: 600; }
+    .pub-note { font-size: .85rem; color: var(--muted); margin-top: 10px; }
+
+    /* ---------- honors / edu / intern ---------- */
+    .honor { list-style: none; margin: 0; padding: 0; }
+    .honor li { padding: 6px 0; display: flex; gap: 12px; }
+    .honor .when { flex: none; width: 72px; color: var(--muted); font-weight: 600; }
+    .edu-item { margin-bottom: 16px; }
+    .edu-item .school { font-weight: 700; }
+    .edu-item .meta { color: var(--muted); font-size: .92rem; }
+    .edu-item ul { margin: 6px 0 0; color: var(--muted); font-size: .93rem; padding-left: 20px; }
+
+    footer {
+      border-top: 1px solid var(--line); margin-top: 60px;
+      padding: 22px 24px; text-align: center; color: var(--muted); font-size: .85rem;
+    }
+    footer a { color: var(--muted); text-decoration: underline; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 900px) {
+      .wrap { flex-direction: column; gap: 0; }
+      .sidebar { width: 100%; }
+      .sidebar-inner { position: static; padding-bottom: 0; }
+      .masthead nav a { padding: 12px 8px; font-size: .88rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="brand" href="#top">Zhifang Guo</a>
+    <nav>
+      <a href="#top" class="active">Homepage</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#honors">Honors &amp; Awards</a>
+      <a href="#education">Educations</a>
+      <a href="#internships">Internships</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" id="top">
+  <!-- ============ sidebar ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <img class="avatar" src="https://github.com/965694547.png?size=400" alt="Zhifang Guo">
+      <h1 class="author-name">Zhifang Guo <span class="cn"></span></h1>
+      <p class="focus-line">Focusing on audio understanding and omni-modal foundation models.</p>
+      <ul class="side-links">
+        <li>
+          <svg class="stroke" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <span>Beijing, China</span>
+        </li>
+        <li>
+          <svg class="stroke" viewBox="0 0 24 24"><path d="M4 21V4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v17M15 9h4a1 1 0 0 1 1 1v11M4 21h17M7.5 7h2M11.5 7h2M7.5 11h2M11.5 11h2M7.5 15h2M11.5 15h2M17.5 13h.01M17.5 17h.01"/></svg>
+          <span>Alibaba Qwen Team</span>
+        </li>
+        <li>
+          <svg class="stroke" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <a href="mailto:A6769408@hotmail.com">A6769408@hotmail.com</a>
+        </li>
+        <li>
+          <svg class="fill" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.9 8 244.8 8z"/></svg>
+          <a href="https://github.com/965694547">Github</a>
+        </li>
+        <li>
+          <svg class="stroke" viewBox="0 0 24 24"><path d="m2 9 10-4.5L22 9l-10 4.5L2 9z"/><path d="M6 10.8V15c0 1.4 2.7 2.8 6 2.8s6-1.4 6-2.8v-4.2M22 9v5"/></svg>
+          <a href="https://scholar.google.com/citations?hl=en&amp;user=LHzzlAgAAAAJ">Google Scholar</a>
+        </li>
+      </ul>
+      <div class="badges">
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=LHzzlAgAAAAJ"><img alt="citations" src="https://img.shields.io/badge/citations-35,000%2B-224b8d"></a>
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=LHzzlAgAAAAJ"><img alt="h-index" src="https://img.shields.io/badge/h--index--33-224b8d"></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ content ============ -->
+  <main class="content">
+
+    <!-- About -->
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="about">
+        <p>
+          I am now working at <a href="https://qwen.ai">Qwen Team</a> of
+          <a href="https://www.alibaba.com">Alibaba Group</a>, leading Omni Pre-training in the
+          Omni &amp; Audio Group. If you are interested in <strong>academic cooperation</strong>,
+          please feel free to email me at <a href="mailto:A6769408@hotmail.com">A6769408@hotmail.com</a>.
+          I am hiring interns!
+        </p>
+        <p>
+          I received my M.S. degree from the <a href="https://www.ict.ac.cn">Institute of Computing
+          Technology, Chinese Academy of Sciences</a> in 2024, and my B.S. degree from
+          <a href="https://www.jlu.edu.cn">Jilin University</a> in 2021.
+        </p>
+        <p>
+          I am the founder and core contributor of the natively end-to-end omni-modal foundation
+          model series <a href="https://arxiv.org/abs/2503.20215">Qwen-Omni</a>
+          (<a href="https://arxiv.org/abs/2503.20215">Qwen2.5-Omni</a>,
+          <a href="https://arxiv.org/abs/2509.17765">Qwen3-Omni</a>,
+          <a href="https://arxiv.org/abs/2604.15804">Qwen3.5-Omni</a>,
+          <a href="https://arxiv.org/abs/2609.25611">Qwen3.8-Omni</a>).
+          The series' open-source releases each crossed 2,000+ GitHub stars on the day of release
+          and ranked #1 on the HuggingFace Trending leaderboard, with
+          <span class="stat-num">8,100+</span> GitHub stars and
+          <span class="stat-num">1,000+</span> Google Scholar citations accumulated to date.
+        </p>
+        <p>
+          My research interest includes audio understanding, omni understanding and omni-modal
+          foundation models. I have published <span class="stat-num">20+</span> papers with
+          <span class="stat-num">35,000+</span> citations at top-tier international AI conferences
+          such as ICLR, ACL, AAAI and ACM MM.
+        </p>
+      </div>
+    </section>
+
+    <!-- News -->
+    <section id="news">
+      <h2>🔥 News</h2>
+      <ul class="news">
+        <li><span class="date">2026.09</span>🔥 <a href="https://arxiv.org/abs/2609.25611">Qwen3.8-Omni</a> is released: a natively end-to-end omni-modal agent, together with the open-source agent stack <a href="https://github.com/QwenLM/Qwen-MM-Plugins">Qwen-MM-Plugins</a> and <a href="https://github.com/QwenLM/Qwen-Live-Harness">Qwen-Live-Harness</a>.</li>
+        <li><span class="date">2026.07</span>🔥 <a href="https://arxiv.org/abs/2607.11699">Qwen-Music</a> and <a href="https://arxiv.org/abs/2607.11738">Qwen-Audio-VAE</a> technical reports are released.</li>
+        <li><span class="date">2026.04</span>🔥 <a href="https://arxiv.org/abs/2604.15804">Qwen3.5-Omni</a> technical report is released: SOTA on 215 audio and audio-visual benchmarks.</li>
+        <li><span class="date">2026.01</span>🔥 <a href="https://arxiv.org/abs/2601.21337">Qwen3-ASR</a> (3,700+ GitHub stars) and <a href="https://arxiv.org/abs/2601.15621">Qwen3-TTS</a> (11,000+ stars on release day) technical reports are released.</li>
+        <li><span class="date">2025.09</span>🔥 <a href="https://arxiv.org/abs/2509.17765">Qwen3-Omni</a> technical report: 2,000+ GitHub stars on the day of release and ranked #1 on HuggingFace Trending.</li>
+        <li><span class="date">2025.07</span>Two papers are accepted by ACL 2025.</li>
+        <li><span class="date">2025.03</span>🔥 <a href="https://arxiv.org/abs/2503.20215">Qwen2.5-Omni</a> technical report: 2,000+ GitHub stars on the day of release and ranked #1 on HuggingFace Trending.</li>
+        <li><span class="date">2024.06</span>I joined the Qwen Team at Alibaba Group after receiving my M.S. degree.</li>
+        <li><span class="date">2024.01</span><a href="https://arxiv.org/abs/2309.02285">PromptTTS 2</a> is accepted by ICLR 2024.</li>
+      </ul>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+      <h2>📝 Publications</h2>
+      <p class="pub-note">* denotes co-first author or core contributor. Full publication list at
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=LHzzlAgAAAAJ">Google Scholar</a>.</p>
+
+      <div class="pub-group">
+        <h3>2026</h3>
+        <ul class="pub">
+          <li><a class="pub-title" href="https://arxiv.org/abs/2609.25611">Qwen3.8-Omni: Towards Native Omni-Modal Agents</a><span class="tag tag-venue">arXiv 2026</span>
+            <span class="authors">41 core contributors including <span class="me">Zhifang Guo</span>*</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2607.11738">Qwen-Audio-VAE Technical Report</a><span class="tag tag-venue">arXiv 2026</span>
+            <span class="authors">14 core contributors including <span class="me">Zhifang Guo</span>*</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2607.11699">Qwen-Music Technical Report</a><span class="tag tag-venue">arXiv 2026</span>
+            <span class="authors">14 core contributors including <span class="me">Zhifang Guo</span>*</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2604.15804">Qwen3.5-Omni Technical Report</a><span class="tag tag-venue">arXiv 2026</span>
+            <span class="authors">42 core contributors including <span class="me">Zhifang Guo</span>*</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2601.21337">Qwen3-ASR Technical Report</a><span class="tag tag-venue">arXiv 2026</span>
+            <span class="authors">Xian Shi*, Xiong Wang*, <span class="me">Zhifang Guo</span>*, et al.</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2601.15621">Qwen3-TTS Technical Report</a><span class="tag tag-venue">arXiv 2026</span>
+            <span class="authors">16 core contributors including <span class="me">Zhifang Guo</span>*</span></li>
+        </ul>
+      </div>
+
+      <div class="pub-group">
+        <h3>2025</h3>
+        <ul class="pub">
+          <li><a class="pub-title" href="https://arxiv.org/abs/2511.21631">Qwen3-VL Technical Report</a><span class="tag tag-venue">arXiv 2025</span>
+            <span class="authors">64 core contributors including <span class="me">Zhifang Guo</span>*</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2509.17765">Qwen3-Omni Technical Report</a><span class="tag tag-venue">arXiv 2025</span>
+            <span class="authors">Jin Xu*, <span class="me">Zhifang Guo</span>*, et al.</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2505.09388">Qwen3 Technical Report</a><span class="tag tag-venue">arXiv 2025</span>
+            <span class="authors">178 contributors including <span class="me">Zhifang Guo</span></span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2503.20215">Qwen2.5-Omni Technical Report</a><span class="tag tag-venue">arXiv 2025</span>
+            <span class="authors">Jin Xu*, <span class="me">Zhifang Guo</span>*, et al.</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2502.13923">Qwen2.5-VL Technical Report</a><span class="tag tag-venue">arXiv 2025</span>
+            <span class="authors">83 contributors including <span class="me">Zhifang Guo</span></span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2503.02769">Inserter: Speech instruction following with unsupervised interleaved pre-training</a><span class="tag tag-venue">ACL 2025</span><span class="tag tag-ccf">CCF-A</span>
+            <span class="authors">Dingdong Wang, Jin Xu, Ruihang Chu, <span class="me">Zhifang Guo</span>, Xiong Wang, Jincenzi Wu, Dongchao Yang, Shengpeng Ji, Junyang Lin</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2409.19283">Analyzing and Mitigating Inconsistency in Discrete Audio Tokens for Neural Codec Language Models</a><span class="tag tag-venue">ACL 2025</span><span class="tag tag-ccf">CCF-A</span>
+            <span class="authors">Wenrui Liu*, <span class="me">Zhifang Guo</span>*, Jin Xu, Yuanjun Lv, Yunfei Chu, Zhou Zhao, Junyang Lin</span></li>
+        </ul>
+      </div>
+
+      <div class="pub-group">
+        <h3>2024</h3>
+        <ul class="pub">
+          <li><a class="pub-title" href="https://arxiv.org/abs/2412.15115">Qwen2.5 Technical Report</a><span class="tag tag-venue">arXiv 2024</span>
+            <span class="authors">93 contributors including <span class="me">Zhifang Guo</span></span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2407.10759">Qwen2-Audio Technical Report</a><span class="tag tag-venue">arXiv 2024</span>
+            <span class="authors">Yunfei Chu, Jin Xu, Qian Yang, Haojie Wei, Xipin Wei, <span class="me">Zhifang Guo</span>, Yichong Leng, Yuanjun Lv, Jinzheng He, Junyang Lin, Chang Zhou, Jingren Zhou</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2505.24496">Speech Token Prediction via Compressed-to-fine Language Modeling for Speech Generation</a><span class="tag tag-venue">Interspeech 2024</span><span class="tag tag-ccf">CCF-C</span>
+            <span class="authors">Wenrui Liu, Qian Chen, Wen Wang, Yafeng Chen, Jin Xu, <span class="me">Zhifang Guo</span>, Guanrou Yang, Weiqin Li, Xiaoda Yang, Tao Jin, Minghui Fang, Jialong Zuo, Bai Jionghao, Zemin Liu</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2408.07919">Advancing multi-grained alignment for contrastive language-audio pre-training</a><span class="tag tag-venue">ACM MM 2024</span><span class="tag tag-oral">Oral</span><span class="tag tag-ccf">CCF-A</span>
+            <span class="authors">Yiming Li, <span class="me">Zhifang Guo</span>, Xiangdong Wang, Hong Liu</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2309.02285">PromptTTS 2: Describing and Generating Voices with Text Prompt</a><span class="tag tag-venue">ICLR 2024</span><span class="tag tag-ccf">CCF-A</span>
+            <span class="authors">Yichong Leng*, <span class="me">Zhifang Guo</span>*, Kai Shen, Xu Tan, Zeqian Ju, Yanqing Liu, Yufei Liu, Dongchao Yang, Leying Zhang, Kaitao Song, Lei He, Xiang-Yang Li, Sheng Zhao, Tao Qin, Jiang Bian</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2308.11940">Audio Generation with Multiple Conditional Diffusion Model</a><span class="tag tag-venue">AAAI 2024</span><span class="tag tag-ccf">CCF-A</span>
+            <span class="authors"><span class="me">Zhifang Guo</span>, Jianguo Mao, Rui Tao, Long Yan, Kazushige Ouchi, Hong Liu, Xiangdong Wang</span></li>
+          <li><a class="pub-title" href="https://arxiv.org/abs/2308.11530">Leveraging Language Model Capabilities for Sound Event Detection</a><span class="tag tag-venue">Interspeech 2024</span><span class="tag tag-ccf">CCF-C</span>
+            <span class="authors">Hualei Wang, Jianguo Mao, <span class="me">Zhifang Guo</span>, Jiarui Wan, Hong Liu, Xiangdong Wang</span></li>
+        </ul>
+      </div>
+
+      <div class="pub-group">
+        <h3>2023</h3>
+        <ul class="pub">
+          <li><a class="pub-title" href="https://arxiv.org/abs/2211.12171">PromptTTS: Controllable Text-to-Speech with Text Descriptions</a><span class="tag tag-venue">ICASSP 2023</span><span class="tag tag-ccf">CCF-B</span>
+            <span class="authors"><span class="me">Zhifang Guo</span>*, Yichong Leng*, Yihan Wu, Sheng Zhao, Xu Tan</span></li>
+        </ul>
+      </div>
+
+      <div class="pub-group">
+        <h3>2022</h3>
+        <ul class="pub">
+          <li><a class="pub-title" href="https://arxiv.org/abs/2210.09529">A Hybrid System of Sound Event Detection Transformer and Frame-wise Model for DCASE 2022 Task 4</a><span class="tag tag-venue">DCASE 2022</span>
+            <span class="authors">Yiming Li, <span class="me">Zhifang Guo</span>, Zhirong Ye, Xiangdong Wang, Hong Liu, Yueliang Qian, Rui Tao, Long Yan, Kazushige Ouchi</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Honors -->
+    <section id="honors">
+      <h2>🎖 Honors and Awards</h2>
+      <ul class="honor">
+        <li><span class="when">2024</span><span>Outstanding Graduate at the Municipal Level (Beijing)</span></li>
+        <li><span class="when">2024</span><span>Chinese Academy of Sciences Director's Scholarship (Top 1%)</span></li>
+        <li><span class="when">2022</span><span>DCASE 2022 Challenge Task 4 Judges' Award (Sole Recipient)</span></li>
+        <li><span class="when">2022</span><span>University of Chinese Academy of Sciences Academic Excellence Scholarship</span></li>
+        <li><span class="when">2021</span><span>Outstanding Graduate at the University Level</span></li>
+        <li><span class="when">2021</span><span>University of Chinese Academy of Sciences Undergraduate Scholarship; First-Class Scholarship (Top 1%)</span></li>
+        <li><span class="when">2020</span><span>Qi-Anxin Scholarship (Top 1%); First-Class Scholarship (Top 1%)</span></li>
+        <li><span class="when">2019</span><span>Samsung Scholarship (Top 1%); National Scholarship (Top 1%)</span></li>
+        <li><span class="when">2018</span><span>National Scholarship (Top 1%)</span></li>
+      </ul>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <h2>📖 Educations</h2>
+      <div class="edu-item">
+        <div><span class="school">Institute of Computing Technology, Chinese Academy of Sciences</span> <span class="meta">Sep. 2021 -- Jun. 2024</span></div>
+        <div class="meta">M.S. in Computer Science and Technology</div>
+      </div>
+      <div class="edu-item">
+        <div><span class="school">School of Communication Engineering, Jilin University</span> <span class="meta">Sep. 2017 -- Jun. 2021</span></div>
+        <div class="meta">B.S. in Automation Engineering &middot; GPA 3.89/4.00 (Ranked 2nd out of 161)</div>
+      </div>
+    </section>
+
+    <!-- Internships -->
+    <section id="internships">
+      <h2>💼 Internships</h2>
+      <ul class="honor">
+        <li><span class="when">2024</span><span>Multimodal Algorithm Intern, Qwen Audio Team, Alibaba (Supervised by <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=COYDNmYAAAAJ">Jin Xu</a>, led by <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=qp6IwtgAAAAJ">Junyang Lin</a>)</span></li>
+        <li><span class="when">2023</span><span>Audio Algorithm Intern, R&amp;D Center, Toshiba (Led by Kazushige Ouchi)</span></li>
+        <li><span class="when">2022</span><span>Speech Algorithm Collaboration, Microsoft Research Asia (Supervised by <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=1jwteOQAAAAJ">Yichong Leng</a>, led by <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=tob-U1oAAAAJ">Xu Tan</a>)</span></li>
+        <li><span class="when">2022</span><span>Speech Algorithm Intern, Meituan (Supervised by Dan Wu, led by Ke Ding)</span></li>
+        <li><span class="when">2022</span><span>NLP Algorithm Intern, Baidu (Supervised by Weiwei Zhang)</span></li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  Last updated: Oct. 2026 &middot; Template inspired by <a href="https://rayeren.github.io/">AcadHomepage</a>.
+</footer>
+
+</body>
+</html>
