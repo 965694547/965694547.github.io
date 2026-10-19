@@ -154,3 +154,5 @@ except SystemExit:
 except Exception:  # noqa: BLE001 - never let the pipeline go red without a record
     ERRORS.append("CRASH: " + traceback.format_exc()[-500:])
     emit_failure()
+
+# bump: trigger crawler run
