@@ -597,12 +597,21 @@
     if (bioP && pubs.length > 0) bioP.textContent = pubs.length;
 
     const norm = s => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    // strict matching: Scholar sometimes garbles entries into short titles
+    // (e.g. just "Qwen3"), which must never claim another paper's count
     const findPub = title => {
       const key = norm(title);
       if (!key) return null;
       return pubs.find(p => {
-        const t = norm((p.bib || p).title);
-        return t && (t.includes(key) || key.includes(t));
+        const t = norm(p.title || (p.bib || {}).title || '');
+        if (!t) return false;
+        if (t === key) return true;
+        if (t.includes(key) || key.includes(t)) {
+          // reject truncated scholar entries: the matched title must be a
+          // substantial part of the queried title, not a stray prefix
+          return t.length >= Math.max(12, key.length * 0.5);
+        }
+        return false;
       }) || null;
     };
 
@@ -614,6 +623,8 @@
       if (hit && hit.num_citations != null && val) {
         val.textContent = num(hit.num_citations);
         if (when) el.title = num(hit.num_citations) + ' citations on Google Scholar · crawled ' + when;
+      } else if (val) {
+        el.title = 'Not indexed by Google Scholar yet — the count fills in automatically once it is';
       }
     });
   }
