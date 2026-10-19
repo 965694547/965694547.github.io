@@ -57,13 +57,25 @@ jobs:
       # a dedicated orphan branch keeps the site history clean and gives
       # jsDelivr/shields.io a permanent URL that never needs a redeploy:
       #   https://cdn.jsdelivr.net/gh/<user>/<repo>@google-scholar-stats/gs_data_shieldsio.json
+      # It also always carries the crawl log + diag info, so any failure can be
+      # read remotely without needing repo admin rights.
       - name: Publish data to the google-scholar-stats branch
-        if: always() && (hashFiles('google_scholar_crawler/results/gs_data.json') != '' || hashFiles('google_scholar_crawler/crawl_output.txt') != '')
+        if: always()
         run: |
           set -e
           TMP=$(mktemp -d)
           cp google_scholar_crawler/results/*.json "$TMP/" 2>/dev/null || true
           cp google_scholar_crawler/crawl_output.txt "$TMP/" 2>/dev/null || true
+          {
+            echo "run: ${GITHUB_RUN_ID} attempt: ${GITHUB_RUN_ATTEMPT}"
+            date -u
+            echo "--- ls google_scholar_crawler"
+            ls -la google_scholar_crawler || true
+            echo "--- ls google_scholar_crawler/results"
+            ls -la google_scholar_crawler/results 2>/dev/null || echo "(no results dir)"
+            echo "--- pip freeze (top)"
+            pip freeze | head -5
+          } > "$TMP/diag.txt"
           ls -la "$TMP"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
