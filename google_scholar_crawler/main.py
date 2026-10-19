@@ -24,7 +24,22 @@ import time
 import traceback
 from datetime import datetime, timezone
 
-from scholarly import scholarly
+import requests
+
+# scholarly issues requests without a timeout; on GitHub-hosted runners the
+# connection to Google can silently hang forever, burning the whole job
+# timeout with zero output. Force a global ceiling on every request.
+_ORIG_REQUEST = requests.Session.request
+
+
+def _request_with_timeout(self, *args, **kwargs):
+    kwargs.setdefault("timeout", 45)
+    return _ORIG_REQUEST(self, *args, **kwargs)
+
+
+requests.Session.request = _request_with_timeout
+
+from scholarly import scholarly  # noqa: E402  (needs the timeout patch first)
 
 SCHOLAR_ID = os.environ.get("GOOGLE_SCHOLAR_ID", "LHzzlAgAAAAJ")
 ATTEMPTS_DIRECT = 3
