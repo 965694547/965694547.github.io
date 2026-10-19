@@ -30,6 +30,7 @@ jobs:
         run: pip install -r google_scholar_crawler/requirements.txt
 
       - name: Crawl Google Scholar profile
+        continue-on-error: true
         env:
           GOOGLE_SCHOLAR_ID: LHzzlAgAAAAJ
         run: |
@@ -37,6 +38,7 @@ jobs:
           python main.py
 
       - name: Commit refreshed data
+        if: always() && hashFiles('google_scholar_crawler/results/gs_data.json') != ''
         run: |
           mkdir -p google-scholar-stats
           cp google_scholar_crawler/results/gs_data.json google-scholar-stats/gs_data.json
@@ -55,6 +57,7 @@ jobs:
       # jsDelivr/shields.io a permanent URL that never needs a redeploy:
       #   https://cdn.jsdelivr.net/gh/<user>/<repo>@google-scholar-stats/gs_data_shieldsio.json
       - name: Publish data to the google-scholar-stats branch
+        if: always() && hashFiles('google_scholar_crawler/results/gs_data.json') != ''
         run: |
           set -e
           TMP=$(mktemp -d)

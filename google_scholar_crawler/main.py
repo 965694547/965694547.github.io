@@ -43,20 +43,23 @@ def fetch_profile_via_free_proxies():
     return fetch_profile()
 
 
-def run_with_retries(fn, attempts, label):
+def run_with_retries(fn, attempts, label, errors):
     for attempt in range(1, attempts + 1):
         try:
             return fn()
         except Exception as exc:  # noqa: BLE001 - network / captcha errors are expected
+            msg = f"{label}#{attempt}: {type(exc).__name__}: {exc}"
             print(f"[{label} attempt {attempt}] failed: {type(exc).__name__}: {exc}")
+            errors.append(msg[:300])
             if attempt < attempts:
                 time.sleep(15 * attempt + random.randint(0, 15))
     return None
 
 
-author = run_with_retries(fetch_profile, ATTEMPTS_DIRECT, "direct")
+errors = []
+author = run_with_retries(fetch_profile, ATTEMPTS_DIRECT, "direct", errors)
 if author is None:
-    author = run_with_retries(fetch_profile_via_free_proxies, ATTEMPTS_PROXY, "free-proxy")
+    author = run_with_retries(fetch_profile_via_free_proxies, ATTEMPTS_PROXY, "free-proxy", errors)
 
 if author is None:
     # Keep the pipeline green but record the failure in the public JSON so the
@@ -73,7 +76,7 @@ if author is None:
     previous.setdefault("publications", {})
     previous["updated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     previous["crawl_status"] = "failed"
-    previous["last_error"] = "all fetch attempts failed (direct + FreeProxies) at " + previous["updated"]
+    previous["last_error"] = ("; ".join(errors[-4:]) or "all fetch attempts failed") + " at " + previous["updated"]
     os.makedirs("results", exist_ok=True)
     tmp = fallback_path + ".tmp"
     with open(tmp, "w", encoding="utf-8") as fh:
