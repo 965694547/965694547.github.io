@@ -35,7 +35,8 @@ jobs:
           GOOGLE_SCHOLAR_ID: LHzzlAgAAAAJ
         run: |
           cd google_scholar_crawler
-          python main.py
+          python main.py 2>&1 | tee crawl_output.txt
+          exit ${PIPESTATUS[0]}
 
       - name: Commit refreshed data
         if: always() && hashFiles('google_scholar_crawler/results/gs_data.json') != ''
@@ -57,17 +58,18 @@ jobs:
       # jsDelivr/shields.io a permanent URL that never needs a redeploy:
       #   https://cdn.jsdelivr.net/gh/<user>/<repo>@google-scholar-stats/gs_data_shieldsio.json
       - name: Publish data to the google-scholar-stats branch
-        if: always() && hashFiles('google_scholar_crawler/results/gs_data.json') != ''
+        if: always() && (hashFiles('google_scholar_crawler/results/gs_data.json') != '' || hashFiles('google_scholar_crawler/crawl_output.txt') != '')
         run: |
           set -e
           TMP=$(mktemp -d)
-          cp google_scholar_crawler/results/gs_data.json "$TMP/"
-          cp google_scholar_crawler/results/gs_data_shieldsio.json "$TMP/"
+          cp google_scholar_crawler/results/*.json "$TMP/" 2>/dev/null || true
+          cp google_scholar_crawler/crawl_output.txt "$TMP/" 2>/dev/null || true
+          ls -la "$TMP"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout --orphan scholar-data-tmp
           git rm -rf . >/dev/null 2>&1 || true
-          cp "$TMP"/*.json .
+          cp "$TMP"/* .
           git add -A
           git commit -m "data: $(date -u +%FT%TZ)" || exit 0
           git push -f origin scholar-data-tmp:google-scholar-stats
