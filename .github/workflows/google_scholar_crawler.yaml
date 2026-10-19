@@ -1,0 +1,70 @@
+name: Update Google Scholar citations
+
+on:
+  schedule:
+    - cron: "*/30 * * * *" # every 30 minutes (GitHub may delay runs a few minutes)
+  workflow_dispatch:
+  push:
+    paths:
+      - "google_scholar_crawler/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scholar-crawl
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install requirements
+        run: pip install -r google_scholar_crawler/requirements.txt
+
+      - name: Crawl Google Scholar profile
+        env:
+          GOOGLE_SCHOLAR_ID: LHzzlAgAAAAJ
+        run: |
+          cd google_scholar_crawler
+          python main.py
+
+      - name: Commit refreshed data
+        run: |
+          mkdir -p google-scholar-stats
+          cp google_scholar_crawler/results/gs_data.json google-scholar-stats/gs_data.json
+          cp google_scholar_crawler/results/gs_data_shieldsio.json google-scholar-stats/gs_data_shieldsio.json
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add google-scholar-stats
+          if git diff --staged --quiet; then
+            echo "No citation changes."
+          else
+            git commit -m "chore: refresh Google Scholar citation data"
+            git push
+          fi
+
+      # a dedicated orphan branch keeps the site history clean and gives
+      # jsDelivr/shields.io a permanent URL that never needs a redeploy:
+      #   https://cdn.jsdelivr.net/gh/<user>/<repo>@google-scholar-stats/gs_data_shieldsio.json
+      - name: Publish data to the google-scholar-stats branch
+        run: |
+          set -e
+          TMP=$(mktemp -d)
+          cp google_scholar_crawler/results/gs_data.json "$TMP/"
+          cp google_scholar_crawler/results/gs_data_shieldsio.json "$TMP/"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan scholar-data-tmp
+          git rm -rf . >/dev/null 2>&1 || true
+          cp "$TMP"/*.json .
+          git add -A
+          git commit -m "data: $(date -u +%FT%TZ)" || exit 0
+          git push -f origin scholar-data-tmp:google-scholar-stats

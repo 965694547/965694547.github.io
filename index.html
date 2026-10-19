@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zhifang Guo - Homepage</title>
+  <meta name="description" content="Zhifang Guo, Multimodal Algorithm Researcher at Alibaba Qwen Team. Audio understanding and omni-modal foundation models.">
+  <link rel="icon" href="assets/img/avatar.jpg?v=2">
+  <style>
+    :root {
+      --link: #224b8d;
+      --link-hover: #22b3eb;
+      --badge-blue: #00369f;
+      --text: #30343f;
+      --muted: #586e75;
+      --line: #efefef;
+      --tag-gray: #f2f3f3;
+      --tag-oral: #fdf1e3;
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 15px; background: #fff; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+    ::selection { color: #fff; background: #000; }
+
+    /* ---------- masthead ---------- */
+    .masthead {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(6px);
+    }
+    .masthead-inner {
+      max-width: 1150px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .masthead .brand {
+      font-weight: 700; color: var(--text); font-size: 1.05rem;
+      padding: 14px 10px; letter-spacing: .2px;
+    }
+    .masthead nav { margin-left: auto; display: flex; flex-wrap: wrap; }
+    .masthead nav a {
+      padding: 14px 12px; color: var(--muted); font-size: .95rem;
+    }
+    .masthead nav a:hover { color: var(--text); text-decoration: none; }
+    .masthead nav a.active { color: var(--text); font-weight: 700; }
+
+    /* ---------- layout ---------- */
+    .wrap { max-width: 1150px; margin: 0 auto; padding: 0 24px; display: flex; gap: 40px; }
+    .sidebar { width: 250px; flex: none; }
+    .sidebar-inner { position: sticky; top: 72px; padding: 40px 0 24px; text-align: center; }
+    .content { flex: 1; min-width: 0; padding-bottom: 80px; }
+    section { padding-top: 28px; scroll-margin-top: 80px; }
+    h2 {
+      font-size: 1.5rem; margin: 0 0 14px; color: var(--text);
+      border-bottom: 2px solid #eaf1fb; display: inline-block; padding-bottom: 4px;
+    }
+    h3.group { font-size: 1.35rem; margin: 30px 0 10px; color: var(--text); font-weight: 700; }
+
+    /* ---------- sidebar ---------- */
+    .avatar { width: 170px; height: 170px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 14px; }
+    .author-name { font-size: 1.55rem; font-weight: 700; color: var(--text); margin: 0 0 6px; }
+    .author-name .cn { font-size: 1.15rem; color: var(--muted); font-weight: 500; }
+    .focus-line { color: var(--muted); font-size: .95rem; margin: 0 18px 10px; }
+    .focus-line strong { color: var(--text); }
+    .focus-line.focus-sub { font-size: .88rem; line-height: 1.5; margin-bottom: 18px; }
+    .side-links { list-style: none; margin: 0; padding: 0; text-align: left; }
+    .side-links li { padding: 5px 0; font-size: .95rem; display: flex; align-items: center; gap: 9px; }
+    .side-links svg { width: 16px; height: 16px; flex: none; }
+    .side-links svg.stroke { fill: none; stroke: var(--muted); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .side-links svg.fill { fill: var(--muted); }
+    .side-links a { color: var(--muted); }
+    .side-links a:hover { color: var(--link); }
+    img.live { height: 18px; vertical-align: -3px; }
+
+    /* ---------- about ---------- */
+    .about p { margin: 0 0 14px; }
+    /* shields.io-style badges (same look as the dynamic-json badge) */
+    .cite-badge {
+      display: inline-flex; vertical-align: -5px; margin: 0 3px;
+      border-radius: 4px; overflow: hidden; font-size: .76rem;
+      line-height: 1; box-shadow: 0 1px 2px rgba(0,0,0,.18);
+    }
+    .cite-badge .cb-label {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 8px; background: #5f6368; color: #fff;
+    }
+    .cite-badge .cb-label svg { display: block; }
+    .cite-badge .cb-value { padding: 4px 8px; background: #3f78c5; color: #fff; font-weight: 600; }
+    /* clickable badges: same look, but wrap an <a> around them */
+    a.cite-badge { text-decoration: none; cursor: pointer; transition: filter .12s, box-shadow .12s; }
+    a.cite-badge:hover { filter: brightness(1.08); box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+    a.cite-badge:active { filter: brightness(.95); }
+    /* same badge, but sitting inside a paper bullet */
+    .cite-badge.paper-cites-badge { vertical-align: -2px; margin: 0 2px; font-size: .72rem; }
+
+    /* ---------- news ---------- */
+    .news { list-style: none; margin: 0; padding: 0; }
+    .news li { padding: 4px 0; }
+    .news .date { font-weight: 600; color: var(--muted); margin-right: 8px; }
+
+    /* ---------- publications: paper-box (AcadHomepage style) ---------- */
+    .paper-box {
+      display: flex; justify-content: left; align-items: center;
+      flex-direction: row; flex-wrap: wrap;
+      border-bottom: 1px solid var(--line);
+      padding: 2em 0 2em 0;
+    }
+    .paper-box .paper-box-image {
+      justify-content: center; display: flex; width: 100%; order: 2;
+    }
+    .paper-box .paper-box-image img {
+      max-width: 400px; width: 100%;
+      box-shadow: 3px 3px 6px #888;
+      object-fit: cover; object-position: top;
+    }
+    .paper-box .paper-box-text { max-width: 100%; order: 1; }
+    @media (min-width: 48em) {
+      .paper-box .paper-box-image { justify-content: left; min-width: 200px; max-width: 36%; order: 1; position: relative; }
+      .paper-box .paper-box-text { justify-content: left; padding-left: 2em; max-width: 64%; order: 2; }
+    }
+    .paper-box .paper-box-text p { margin: 0 0 8px; }
+    .paper-box .paper-box-text p.paper-title { font-size: 1.02rem; }
+    .paper-box .paper-box-text ul { margin: 0; padding-left: 18px; font-size: .93rem; color: var(--muted); }
+    .paper-box .paper-box-text ul li { margin-bottom: 4px; }
+    .paper-box .paper-box-text ul li strong { color: var(--text); }
+    .badge {
+      padding-left: 1rem; padding-right: 1rem;
+      position: absolute; top: .5em; left: -.5em; z-index: 2;
+      color: #fff; background-color: var(--badge-blue); font-size: .8em;
+      border-radius: 2px; white-space: nowrap;
+    }
+    .badge.oral { background-color: #b05e00; }
+    .tag {
+      display: inline-block; padding: 1px 9px; border-radius: 12px;
+      font-size: .76rem; margin-left: 6px; vertical-align: 1px;
+    }
+    .tag-ccf { background: var(--tag-gray); color: var(--muted); }
+    .tag-oral { background: var(--tag-oral); color: #b05e00; font-weight: 600; }
+    .pub-note { font-size: .88rem; color: var(--muted); margin: 0 0 4px; }
+    .links { font-size: .95rem; }
+    .links a { font-weight: 400; }
+    .pub-list { list-style: none; margin: 4px 0 0; padding: 0; }
+    .pub-list li {
+      padding: 6px 0 6px 14px; text-indent: -14px;
+      font-size: .95rem; line-height: 1.72; color: var(--muted);
+    }
+    .pub-list li::before { content: "\2022"; color: #b9c0c2; margin-right: 7px; }
+    .pub-list .venue {
+      display: inline-block; margin-right: 6px; padding: 1px 7px;
+      border-radius: 3px; background: var(--badge-blue); color: #fff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .76rem; line-height: 1.5; text-indent: 0; white-space: nowrap;
+    }
+    .pub-list .pub-title { font-weight: 600; }
+    .pub-list .pub-authors { color: var(--muted); }
+    .pub-list .pub-authors b { color: var(--text); font-weight: 700; }
+    .pub-list .note { color: #8a9295; }
+
+    /* ---------- honors / edu / intern ---------- */
+    .honor { list-style: none; margin: 0; padding: 0; }
+    .honor li { padding: 6px 0; display: flex; gap: 12px; }
+    .honor .when { flex: none; width: 72px; color: var(--muted); font-weight: 600; }
+    .edu-item { margin-bottom: 16px; }
+    .edu-item .school { font-weight: 700; }
+    .edu-item .meta { color: var(--muted); font-size: .92rem; }
+
+    footer {
+      border-top: 1px solid var(--line); margin-top: 60px;
+      padding: 22px 24px; text-align: center; color: var(--muted); font-size: .85rem;
+    }
+    footer a { color: var(--muted); text-decoration: underline; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 900px) {
+      .wrap { flex-direction: column; gap: 0; }
+      .sidebar { width: 100%; }
+      .sidebar-inner { position: static; padding-bottom: 0; }
+      .masthead nav a { padding: 12px 8px; font-size: .88rem; }
+      .badge { position: static; display: inline-block; margin-bottom: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="brand" href="#top">Zhifang Guo</a>
+    <nav>
+      <a href="#top" class="active">Homepage</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#honors">Honors &amp; Awards</a>
+      <a href="#education">Educations</a>
+      <a href="#internships">Internships &amp; Collaborations</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" id="top">
+  <!-- ============ sidebar ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <img class="avatar" src="assets/img/avatar.jpg?v=2" alt="Zhifang Guo">
+      <h1 class="author-name">Zhifang Guo <span class="cn">(郭智方)</span></h1>
+      <p class="focus-line focus-sub">吉林大学 &middot; 中国科学院计算技术研究所</p>
+      <ul class="side-links">
+        <li>
+          <svg class="stroke" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <span>Beijing</span>
+        </li>
+        <li>
+          <svg class="stroke" viewBox="0 0 24 24"><path d="M4 21V4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v17M15 9h4a1 1 0 0 1 1 1v11M4 21h17M7.5 7h2M11.5 7h2M7.5 11h2M11.5 11h2M7.5 15h2M11.5 15h2M17.5 13h.01M17.5 17h.01"/></svg>
+          <span>Alibaba Qwen Team</span>
+        </li>
+        <li>
+          <svg class="stroke" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <a href="mailto:A6769408@hotmail.com">A6769408@hotmail.com</a>
+        </li>
+        <li>
+          <svg class="fill" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.9 8 244.8 8z"/></svg>
+          <a href="https://github.com/965694547">GitHub</a>
+        </li>
+        <li>
+          <svg class="stroke" viewBox="0 0 24 24"><path d="m2 9 10-4.5L22 9l-10 4.5L2 9z"/><path d="M6 10.8V15c0 1.4 2.7 2.8 6 2.8s6-1.4 6-2.8v-4.2M22 9v5"/></svg>
+          <a href="https://scholar.google.com/citations?hl=en&amp;user=LHzzlAgAAAAJ">Google Scholar</a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- ============ content ============ -->
+  <main class="content">
+
+    <!-- About -->
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="about">
+        <p>
+          I am a Multimodal Algorithm Researcher at the <a href="https://qwen.ai">Qwen Team</a>
+          (通义千问团队) of <a href="https://www.alibaba.com">Alibaba Group</a> (阿里巴巴), where I lead
+          <strong>Omni Pre-training</strong> in the Omni &amp; Audio Group. My research interest includes
+          <strong>audio understanding</strong>, <strong>omni-modal foundation models</strong> and
+          <strong>controllable speech generation</strong>. I have published
+          <a class="cite-badge" href="#publications" title="Counted from this page: featured cards + Other Publications entries. Click to jump to the list.">
+            <span class="cb-label"><svg viewBox="0 0 24 24" width="12" height="12" fill="#fff"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2.5L17.5 8H14V4.5zM8 12h8v1.6H8V12zm0 3.4h8V17H8v-1.6z"/></svg>papers</span><b class="cb-value" id="bio_pubs">22</b>
+          </a> with
+          <a class="cite-badge" href="https://scholar.google.com/citations?user=LHzzlAgAAAAJ&amp;hl=en" target="_blank" rel="noopener" title="Crawled from Google Scholar every 30 minutes. Click to open the profile.">
+            <span class="cb-label"><svg viewBox="0 0 24 24" width="12" height="12" fill="#fff"><path d="M12 3 1 8.5 11 13.4v2.2c-3.3.3-6 1.9-6 3.4 0 1.7 3.1 3 7 3s7-1.3 7-3c0-1.5-2.7-3.1-6-3.4v-2.2L23 8.5 12 3z"/></svg>citations</span><b class="cb-value" id="bio_cit">35,672</b>
+          </a>
+          at top-tier international AI conferences such as ICLR, ACL, AAAI and ACM MM. If you are seeking any
+          form of <strong>academic cooperation</strong>, please feel free to email me at
+          <a href="mailto:A6769408@hotmail.com">A6769408@hotmail.com</a>. We are hiring interns!
+        </p>
+        <p>
+          I am the founder and core contributor of the natively end-to-end omni-modal foundation model
+          series <strong>Qwen-Omni</strong> (<a href="https://arxiv.org/abs/2503.20215">Qwen2.5-Omni</a>,
+          <a href="https://arxiv.org/abs/2509.17765">Qwen3-Omni</a>,
+          <a href="https://arxiv.org/abs/2604.15804">Qwen3.5-Omni</a>,
+          <a href="https://arxiv.org/abs/2609.25611">Qwen3.8-Omni</a>), which has grown from an omni-modal
+          model into a native omni-modal agent, and whose open-source releases each ranked
+          <strong>#1 on the HuggingFace Trending leaderboard</strong>. I also lead the products derived
+          from it &mdash; Qwen3-ASR, Qwen3-TTS, Qwen3-LiveTranslate, Qwen-Music, Qwen-Audio-VAE and
+          Qwen3.8-LiveTranslate. All of these efforts center on three research interests: audio
+          understanding, omni understanding and omni-modal foundation models.
+        </p>
+        <p>
+          Before joining Qwen, I received my B.S. degree in Automation Engineering from
+          <a href="https://www.jlu.edu.cn">Jilin University</a> (吉林大学) in 2021, and my M.S. degree in
+          Computer Science and Technology from the
+          <a href="https://www.ict.ac.cn">Institute of Computing Technology</a>,
+          <a href="https://www.ucas.ac.cn">Chinese Academy of Sciences</a> (中国科学院计算技术研究所) in
+          2024. In my master's years I worked on controllable speech synthesis, speech representation and
+          controllable audio generation: proposing <strong>PromptTTS</strong> / <strong>PromptTTS 2</strong>,
+          which use natural language to control timbre and style and have since become a de facto benchmark
+          for prompt-based TTS (ICASSP 2023, ICLR 2024), and building one of the early diffusion frameworks
+          for multi-conditional audio generation (AAAI 2024).
+        </p>
+      </div>
+    </section>
+
+    <!-- News -->
+    <section id="news">
+      <h2>🔥 News</h2>
+      <ul class="news">
+        <li><span class="date">2026.09:</span>🎉 <a href="https://arxiv.org/abs/2609.25611">Qwen3.8-Omni</a> is released: a natively end-to-end omni-modal agent, together with the open-source agent stack <a href="https://github.com/QwenLM/Qwen-MM-Plugins">Qwen-MM-Plugins</a> and <a href="https://github.com/QwenLM/Qwen-Live-Harness">Qwen-Live-Harness</a>!</li>
+        <li><span class="date">2026.09:</span>🎉 <a href="https://qwen.ai/blog?id=qwen3.8-livetranslate">Qwen3.8-LiveTranslate</a> is released: simultaneous interpretation is recast as a single interleaved audio&ndash;text stream, covering 60 languages, with average lagging cut from 2.8s to 2.3s, plus real-time speaker diarization and same-frame bilingual subtitles.</li>
+        <li><span class="date">2026.07:</span>🎉 <a href="https://arxiv.org/abs/2607.11699">Qwen-Music</a> and <a href="https://arxiv.org/abs/2607.11738">Qwen-Audio-VAE</a> technical reports are released.</li>
+        <li><span class="date">2026.04:</span>🎉 <a href="https://arxiv.org/abs/2604.15804">Qwen3.5-Omni</a> technical report is released: SOTA on 215 audio and audio-visual benchmarks.</li>
+        <li><span class="date">2026.01:</span>🎉 <a href="https://qwen.ai/blog?id=qwen3tts-0115">Qwen3-TTS</a> is released with voice clone, voice design and natural-language voice control, receiving 11,000+ GitHub stars on the day of release.</li>
+        <li><span class="date">2026.01:</span>🎉 <a href="https://arxiv.org/abs/2601.21337">Qwen3-ASR</a> technical report is released, with 2,500+ GitHub stars on the day of release.</li>
+        <li><span class="date">2025.09:</span>🎉 <a href="https://arxiv.org/abs/2509.17765">Qwen3-Omni</a> technical report: 2,000+ GitHub stars on the day of release and ranked #1 on HuggingFace Trending!</li>
+        <li><span class="date">2025.09:</span>🎉 <a href="https://qwen.ai/blog?id=qwen3-livetranslate">Qwen3-LiveTranslate</a> is released: real-time multimodal interpretation in 18 languages with vision-enhanced understanding and 3-second latency, ranking first on multiple Chinese&ndash;English and multilingual speech translation benchmarks.</li>
+        <li><span class="date">2025.03:</span>🎉 <a href="https://arxiv.org/abs/2503.20215">Qwen2.5-Omni</a> technical report: 2,000+ GitHub stars on the day of release and ranked #1 on HuggingFace Trending!</li>
+        <li><span class="date">2024.01:</span>🎉 <a href="https://arxiv.org/abs/2309.02285">PromptTTS 2</a> is accepted by ICLR 2024, adding an LLM-based description pipeline and a <i>Variation Network</i> for diverse timbres.</li>
+        <li><span class="date">2023.06:</span>🎉 <a href="https://arxiv.org/abs/2211.12171">PromptTTS</a> — controlling text-to-speech with natural-language descriptions — is presented at ICASSP 2023; the <a href="https://speechresearch.github.io/prompttts/">demo</a> and the <i>PromptSpeech</i> dataset are released.</li>
+      </ul>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+      <h2>📝 Publications</h2>
+      <p class="pub-note">* denotes co-first author or core contributor. Full publication list at
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=LHzzlAgAAAAJ">Google Scholar</a>.</p>
+
+      <!-- ====== Omni-modal foundation models ====== -->
+      <h3 class="group">🌐 Omni-Modal Foundation Models</h3>
+
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="badge">Technical Report 2026</div>
+          <img src="assets/img/figs/2609_25611_overview.jpg?v=1" alt="Qwen3.8-Omni-Flash production overview">
+        </div>
+        <div class="paper-box-text">
+          <p class="paper-title"><a href="https://arxiv.org/abs/2609.25611">Qwen3.8-Omni: Towards Native Omni-Modal Agents</a></p>
+          <p>41 core contributors including <strong>Zhifang Guo</strong>*</p>
+          <p class="links"><a href="https://arxiv.org/abs/2609.25611">Paper</a> | <a href="https://qwen.ai/blog?id=qwen3.8-omni-flash">Blog</a> | <a href="https://chat.qwen.ai">Demo</a> | <a href="https://github.com/QwenLM/Qwen-MM-Plugins">Plugins</a> | <a href="https://github.com/QwenLM/Qwen-Live-Harness">Harness</a> | <a class="cite-badge paper-cites-badge" data-title="Qwen3.8-Omni: Towards Native Omni-Modal Agents" title="Google Scholar citation count" href="https://scholar.google.com/scholar?hl=en&q=%22Qwen3.8-Omni%3A%20Towards%20Native%20Omni-Modal%20Agents%22" target="_blank" rel="noopener" title="View citations on Google Scholar"><span class="cb-label"><svg viewBox="0 0 24 24" width="11" height="11" fill="#fff"><path d="M12 3 1 8.5 11 13.4v2.2c-3.3.3-6 1.9-6 3.4 0 1.7 3.1 3 7 3s7-1.3 7-3c0-1.5-2.7-3.1-6-3.4v-2.2L23 8.5 12 3z"/></svg> citations</span><b class="cb-value">&mdash;</b></a></p>
+          <ul>
+            <li><strong>Native omni-modal agent</strong>: advances omni models from perceiving and interacting to planning tasks, calling tools and completing real-world multimedia productivity work such as agentic video editing and film narration.</li>
+            <li><strong>Performance</strong>: improves the average score by more than 25% over <i>Qwen3.5-Omni-Plus</i> across 29 evaluations, while cutting the estimated API input cost per hour of audio and audio-visual content by more than 98% and 93%.</li>
+            <li><strong>Open-Source Impact</strong>: the open-source agent stack <a href="https://github.com/QwenLM/Qwen-MM-Plugins">Qwen-MM-Plugins</a>
+              <a href="https://github.com/QwenLM/Qwen-MM-Plugins"><img class="live" src="https://img.shields.io/github/stars/QwenLM/Qwen-MM-Plugins?style=social" alt="GitHub stars"></a>
+              and <a href="https://github.com/QwenLM/Qwen-Live-Harness">Qwen-Live-Harness</a>
+              <a href="https://github.com/QwenLM/Qwen-Live-Harness"><img class="live" src="https://img.shields.io/github/stars/QwenLM/Qwen-Live-Harness?style=social" alt="GitHub stars"></a>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="badge">Technical Report 2026</div>
+          <img src="assets/img/figs/2604_15804.png" alt="Qwen3.5-Omni overview figure">
+        </div>
+        <div class="paper-box-text">
+          <p class="paper-title"><a href="https://arxiv.org/abs/2604.15804">Qwen3.5-Omni Technical Report</a></p>
+          <p>42 core contributors including <strong>Zhifang Guo</strong>*</p>
+          <p class="links"><a href="https://arxiv.org/abs/2604.15804">Paper</a> | <a href="https://qwen.ai/blog?id=qwen3.5-omni">Blog</a> | <a href="https://huggingface.co/spaces/Qwen/Qwen3.5-Omni-Online-Demo">Demo</a> | <a class="cite-badge paper-cites-badge" data-title="Qwen3.5-Omni Technical Report" title="Google Scholar citation count" href="https://scholar.google.com/scholar?hl=en&q=%22Qwen3.5-Omni%20Technical%20Report%22" target="_blank" rel="noopener" title="View citations on Google Scholar"><span class="cb-label"><svg viewBox="0 0 24 24" width="11" height="11" fill="#fff"><path d="M12 3 1 8.5 11 13.4v2.2c-3.3.3-6 1.9-6 3.4 0 1.7 3.1 3 7 3s7-1.3 7-3c0-1.5-2.7-3.1-6-3.4v-2.2L23 8.5 12 3z"/></svg> citations</span><b class="cb-value">&mdash;</b></a></p>
+          <ul>
+            <li><strong>SOTA Performance</strong>: achieving SOTA on <strong>215</strong> audio and audio-visual understanding, reasoning and interaction subtasks/benchmarks, surpassing <i>Gemini-3.1 Pro</i> in key audio tasks.</li>
+            <li><strong>Long Context</strong>: supporting up to 256k tokens — 10 hours of audio or 400 seconds of 720P video — with semantic interruption and end-to-end controllable voice dialogue.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="badge">Technical Report 2025</div>
+          <img src="assets/img/figs/2509_17765.png?v=2" alt="Qwen3-Omni overview figure">
+        </div>
+        <div class="paper-box-text">
+          <p class="paper-title"><a href="https://arxiv.org/abs/2509.17765">Qwen3-Omni Technical Report</a></p>
+          <p>Jin Xu*, <strong>Zhifang Guo</strong>*, et al.</p>
+          <p class="links"><a href="https://arxiv.org/abs/2509.17765">Paper</a> | <a href="https://github.com/QwenLM/Qwen3-Omni">GitHub</a> | <a href="https://qwen.ai/blog?id=qwen3-omni">Blog</a> | <a href="https://huggingface.co/spaces/Qwen/Qwen3-Omni-Demo">Demo</a> | <a class="cite-badge paper-cites-badge" data-title="Qwen3-Omni Technical Report" title="Google Scholar citation count" href="https://scholar.google.com/scholar?hl=en&q=%22Qwen3-Omni%20Technical%20Report%22" target="_blank" rel="noopener" title="View citations on Google Scholar"><span class="cb-label"><svg viewBox="0 0 24 24" width="11" height="11" fill="#fff"><path d="M12 3 1 8.5 11 13.4v2.2c-3.3.3-6 1.9-6 3.4 0 1.7 3.1 3 7 3s7-1.3 7-3c0-1.5-2.7-3.1-6-3.4v-2.2L23 8.5 12 3z"/></svg> citations</span><b class="cb-value">&mdash;</b></a></p>
+          <ul>
+            <li><strong>Natively omni-modal pre-training</strong>: an end-to-end multilingual omni model without performance degradation compared with single-modality models.</li>
+            <li><strong>Powerful Performance</strong>: SOTA on 32 benchmarks and overall SOTA on 22 across 36 audio and audio-visual benchmarks, outperforming <i>Gemini-2.5-Pro</i>, <i>Seed-ASR</i> and <i>GPT-4o-Transcribe</i>.</li>
+            <li><strong>Open-Source Impact</strong>: ranked #1 on the HuggingFace Trending leaderboard on release.
+              <a href="https://github.com/QwenLM/Qwen3-Omni"><img class="live" src="https://img.shields.io/github/stars/QwenLM/Qwen3-Omni?style=social" alt="GitHub stars"></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="badge">Technical Report 2025</div>
+          <img src="assets/img/figs/2503_20215.png" alt="Qwen2.5-Omni overview figure">
+        </div>
+        <div class="paper-box-text">
+          <p class="paper-title"><a href="https://arxiv.org/abs/2503.20215">Qwen2.5-Omni Technical Report</a></p>
+          <p>Jin Xu*, <strong>Zhifang Guo</strong>*, et al.</p>
+          <p class="links"><a href="https://arxiv.org/abs/2503.20215">Paper</a> | <a href="https://github.com/QwenLM/Qwen2.5-Omni">GitHub</a> | <a href="https://qwenlm.github.io/zh/blog/qwen2.5-omni/">Blog</a> | <a href="https://huggingface.co/spaces/Qwen/Qwen2.5-Omni-7B-Demo">Demo</a> | <a class="cite-badge paper-cites-badge" data-title="Qwen2.5-Omni Technical Report" title="Google Scholar citation count" href="https://scholar.google.com/scholar?hl=en&q=%22Qwen2.5-Omni%20Technical%20Report%22" target="_blank" rel="noopener" title="View citations on Google Scholar"><span class="cb-label"><svg viewBox="0 0 24 24" width="11" height="11" fill="#fff"><path d="M12 3 1 8.5 11 13.4v2.2c-3.3.3-6 1.9-6 3.4 0 1.7 3.1 3 7 3s7-1.3 7-3c0-1.5-2.7-3.1-6-3.4v-2.2L23 8.5 12 3z"/></svg> citations</span><b class="cb-value">&mdash;</b></a></p>
+          <ul>
+            <li><strong>Thinker–Talker architecture</strong>: perceives text, images, audio and video while streaming text and natural speech responses, with the Time-aligned Multimodal RoPE (TMRoPE) synchronizing video timestamps with audio.</li>
+            <li><strong>Open-Source Impact</strong>: ranked #1 on the HuggingFace Trending leaderboard on release.
+              <a href="https://github.com/QwenLM/Qwen2.5-Omni"><img class="live" src="https://img.shields.io/github/stars/QwenLM/Qwen2.5-Omni?style=social" alt="GitHub stars"></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ====== Speech ====== -->
+      <h3 class="group">🎙 Speech Recognition</h3>
+
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="badge">Technical Report 2026</div>
+          <img src="assets/img/figs/2601_21337.png" alt="Qwen3-ASR overview figure">
+        </div>
+        <div class="paper-box-text">
+          <p class="paper-title"><a href="https://arxiv.org/abs/2601.21337">Qwen3-ASR Technical Report</a></p>
+          <p>Xian Shi*, Xiong Wang*, <strong>Zhifang Guo</strong>*, et al.</p>
+          <p class="links"><a href="https://arxiv.org/abs/2601.21337">Paper</a> | <a href="https://github.com/QwenLM/Qwen3-ASR">GitHub</a> | <a href="https://qwen.ai/blog?id=qwen3asr">Blog</a> | <a href="https://huggingface.co/spaces/Qwen/Qwen3-ASR">Demo</a> | <a class="cite-badge paper-cites-badge" data-title="Qwen3-ASR Technical Report" title="Google Scholar citation count" href="https://scholar.google.com/scholar?hl=en&q=%22Qwen3-ASR%20Technical%20Report%22" target="_blank" rel="noopener" title="View citations on Google Scholar"><span class="cb-label"><svg viewBox="0 0 24 24" width="11" height="11" fill="#fff"><path d="M12 3 1 8.5 11 13.4v2.2c-3.3.3-6 1.9-6 3.4 0 1.7 3.1 3 7 3s7-1.3 7-3c0-1.5-2.7-3.1-6-3.4v-2.2L23 8.5 12 3z"/></svg> citations</span><b class="cb-value">&mdash;</b></a></p>
+          <ul>
+            <li><strong>Production-ready recognition</strong>: <i>Qwen3-ASR-0.6B</i> reaches 2,000× throughput at a concurrency of 128, and both models unify streaming and offline inference with long-audio transcription.</li>
+            <li><strong>Open-Source Impact</strong>: outperforms strong open and closed models such as <i>Whisper</i> in real-world audio.
+              <a href="https://github.com/QwenLM/Qwen3-ASR"><img class="live" src="https://img.shields.io/github/stars/QwenLM/Qwen3-ASR?style=social" alt="GitHub stars"></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ====== Speech translation ====== -->
+      <h3 class="group">&#128483;&#65039; Speech Translation</h3>
+
+      <div class="paper-box release">
+        <div class="paper-box-image">
+          <div class="badge">Release 2026</div>
+          <img src="assets/img/figs/livetranslate_38.png?v=2" alt="Qwen3.8-LiveTranslate: from an ASR-MT-TTS cascade to a single interleaved audio-text causal stream">
+        </div>
+        <div class="paper-box-text">
+          <p class="paper-title"><a href="https://qwen.ai/blog?id=qwen3.8-livetranslate">Qwen3.8-LiveTranslate</a></p>
+          <p>Qwen Team</p>
+          <p class="links"><a href="https://qwen.ai/blog?id=qwen3.8-livetranslate">Blog</a> | <a href="https://omni.qwen.ai/live-translate">Demo</a></p>
+          <ul>
+            <li><strong>One stream instead of three models</strong>: recasts simultaneous interpretation as a single interleaved audio&ndash;text causal stream rather than an ASR&ndash;MT&ndash;TTS cascade, with no intermediate transcript.</li>
+            <li><strong>Lower latency, same timbre</strong>: average lagging cut from 2.8s to 2.3s, and each speaker keeps their own voice.</li>
+            <li><strong>Coverage</strong>: 85.7 xCOMET-XXL on <i>FLEURS</i> across 70 translation directions, with real-time speaker diarization and same-frame bilingual subtitles.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="paper-box release">
+        <div class="paper-box-image">
+          <div class="badge">Release 2026</div>
+          <img src="assets/img/figs/livetranslate_35.png?v=2" alt="Qwen3.5-LiveTranslate: streaming interpretation with Qwen3.5-Omni">
+        </div>
+        <div class="paper-box-text">
+          <p class="paper-title"><a href="https://qwen.ai/blog?id=qwen3.5-livetranslate">Qwen3.5-LiveTranslate</a></p>
+          <p>Qwen Team</p>
+          <p class="links"><a href="https://qwen.ai/blog?id=qwen3.5-livetranslate">Blog</a> | <a href="https://omni.qwen.ai/live-translate">Demo</a></p>
+          <ul>
+            <li><strong>Streaming interpretation</strong>: built on the Qwen3.5-Omni Thinker&ndash;Talker architecture, with chunk-wise audio/video input and <i>Readable Unit</i> tags that set the synthesis granularity &mdash; the first-character latency drops by 3.45s and the average character latency by 1.88s over Qwen3-LiveTranslate-Flash, reaching <strong>2.8s end-to-end</strong>.</li>
+            <li><strong>Broader coverage</strong>: 60 languages for input speech and output text, and 29 languages with translated speech output (up from 18 / 10), covering multilingual meetings, livestream localisation and outbound travel.</li>
+            <li><strong>Voice cloning &amp; hotwords</strong>: dynamic cross-lingual cloning keeps the speaker&rsquo;s own timbre across languages, and up to 1,000 hotwords keep names, brands and technical terms right.</li>
+            <li><strong>Vision-aware</strong>: uses on-screen text, objects and scene context to resolve ambiguous words, as shown in the visual-disambiguation demos.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ====== Controllable speech synthesis ====== -->
+      <h3 class="group">🎨 Controllable Speech Synthesis</h3>
+
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="badge">ICASSP 2023</div>
+          <img src="assets/img/figs/2211_12171.png" alt="PromptTTS framework figure">
+        </div>
+        <div class="paper-box-text">
+          <p class="paper-title"><a href="https://arxiv.org/abs/2211.12171">PromptTTS: Controllable Text-to-Speech with Text Descriptions</a></p>
+          <p><strong>Zhifang Guo</strong>*, Yichong Leng*, Yihan Wu, Sheng Zhao, Xu Tan</p>
+          <p class="links"><a href="https://arxiv.org/abs/2211.12171">Paper</a> | <a href="https://speechresearch.github.io/prompttts/">Demo</a></p>
+          <ul>
+            <li><strong>Pioneering work</strong>: controls the style and timbre of synthesized speech with natural-language descriptions, using separate style and content encoders together with the <i>PromptSpeech</i> dataset.</li>
+            <li><strong>Academic Impact</strong>: <i>PromptTTS</i> and <i>PromptSpeech</i> have been widely adopted as a benchmark following the rise of prompt-based TTS. <a class="cite-badge paper-cites-badge" data-title="PromptTTS: Controllable Text-to-Speech with Text Descriptions" href="https://scholar.google.com/scholar?hl=en&q=%22PromptTTS%3A%20Controllable%20Text-to-Speech%20with%20Text%20Descriptions%22" target="_blank" rel="noopener" title="View citations on Google Scholar"><span class="cb-label"><svg viewBox="0 0 24 24" width="11" height="11" fill="#fff"><path d="M12 3 1 8.5 11 13.4v2.2c-3.3.3-6 1.9-6 3.4 0 1.7 3.1 3 7 3s7-1.3 7-3c0-1.5-2.7-3.1-6-3.4v-2.2L23 8.5 12 3z"/></svg>citations</span><b class="cb-value">250</b></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="badge">ICLR 2024</div>
+          <img src="assets/img/figs/2309_02285.png" alt="PromptTTS 2 overview figure">
+        </div>
+        <div class="paper-box-text">
+          <p class="paper-title"><a href="https://arxiv.org/abs/2309.02285">PromptTTS 2: Describing and Generating Voices with Text Prompt</a></p>
+          <p>Yichong Leng*, <strong>Zhifang Guo</strong>*, Kai Shen, Xu Tan, Zeqian Ju, Yanqing Liu, Yufei Liu, Dongchao Yang, Leying Zhang, Kaitao Song, Lei He, Xiang-Yang Li, Sheng Zhao, Tao Qin, Jiang Bian</p>
+          <p class="links"><a href="https://arxiv.org/abs/2309.02285">Paper</a> | <a href="https://github.com/microsoft/NeuralSpeech/blob/master/PromptTTS2/README.md">GitHub</a> | <a href="https://speechresearch.github.io/prompttts2/">Demo</a></p>
+          <ul>
+            <li><strong>Automatic description pipeline</strong>: leverages large language models to generate speech textual descriptions, addressing the imbalance between text and speech data in <i>PromptTTS</i>.</li>
+            <li><strong>Resolving the one-to-many issue</strong>: a <i>Variation Network</i> generates multiple diverse timbres while remaining consistent with a given description. <a class="cite-badge paper-cites-badge" data-title="PromptTTS 2: Describing and Generating Voices with Text Prompt" href="https://scholar.google.com/scholar?hl=en&q=%22PromptTTS%202%3A%20Describing%20and%20Generating%20Voices%20with%20Text%20Prompt%22" target="_blank" rel="noopener" title="View citations on Google Scholar"><span class="cb-label"><svg viewBox="0 0 24 24" width="11" height="11" fill="#fff"><path d="M12 3 1 8.5 11 13.4v2.2c-3.3.3-6 1.9-6 3.4 0 1.7 3.1 3 7 3s7-1.3 7-3c0-1.5-2.7-3.1-6-3.4v-2.2L23 8.5 12 3z"/></svg>citations</span><b class="cb-value">60</b></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ====== Controllable audio generation ====== -->
+      <h3 class="group">🎵 Controllable Audio Generation</h3>
+
+      <div class="paper-box">
+        <div class="paper-box-image">
+          <div class="badge">AAAI 2024</div>
+          <img src="assets/img/figs/2308_11940.png" alt="Audio Generation with Multiple Conditional Diffusion Model overview figure">
+        </div>
+        <div class="paper-box-text">
+          <p class="paper-title"><a href="https://arxiv.org/abs/2308.11940">Audio Generation with Multiple Conditional Diffusion Model</a></p>
+          <p><strong>Zhifang Guo</strong>, Jianguo Mao, Rui Tao, Long Yan, Kazushige Ouchi, Hong Liu, Xiangdong Wang</p>
+          <p class="links"><a href="https://arxiv.org/abs/2308.11940">Paper</a> | <a href="https://conditionaudiogen.github.io/conditionaudiogen/">Demo</a> | <a class="cite-badge paper-cites-badge" data-title="Audio Generation with Multiple Conditional Diffusion Model" title="Google Scholar citation count" href="https://scholar.google.com/scholar?hl=en&q=%22Audio%20Generation%20with%20Multiple%20Conditional%20Diffusion%20Model%22" target="_blank" rel="noopener" title="View citations on Google Scholar"><span class="cb-label"><svg viewBox="0 0 24 24" width="11" height="11" fill="#fff"><path d="M12 3 1 8.5 11 13.4v2.2c-3.3.3-6 1.9-6 3.4 0 1.7 3.1 3 7 3s7-1.3 7-3c0-1.5-2.7-3.1-6-3.4v-2.2L23 8.5 12 3z"/></svg> citations</span><b class="cb-value">&mdash;</b></a></p>
+          <ul>
+            <li><strong>Fine-grained control</strong>: augments pre-trained text-to-audio models with a Control Condition Encoder that accepts the event set, timestamp, class object, pitch contour and energy contour, enabling temporal order control and more accurate descriptions.</li>
+            <li><strong>Fusion-Net</strong>: injects the control embedding into every layer of the U-Net of the conditional latent diffusion model, outperforming state-of-the-art TTA models on AudioCaps in both objective and subjective evaluations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ====== other publications ====== -->
+      <h3 class="group">📄 Other Publications</h3>
+      <p class="pub-note">* denotes co-first author or core contributor.</p>
+      <ul class="pub-list">
+        <li><span class="venue">Technical Report 2026</span><a class="pub-title" href="https://arxiv.org/abs/2607.11699">Qwen-Music Technical Report</a>, <span class="pub-authors">14 core contributors including <b>Zhifang Guo</b>*</span></li>
+        <li><span class="venue">Technical Report 2026</span><a class="pub-title" href="https://arxiv.org/abs/2607.11738">Qwen-Audio-VAE Technical Report</a>, <span class="pub-authors">14 core contributors including <b>Zhifang Guo</b>*</span></li>
+        <li><span class="venue">Technical Report 2026</span><a class="pub-title" href="https://arxiv.org/abs/2601.15621">Qwen3-TTS Technical Report</a>, <span class="pub-authors">16 core contributors including <b>Zhifang Guo</b>*</span></li>
+        <li><span class="venue">Technical Report 2025</span><a class="pub-title" href="https://arxiv.org/abs/2511.21631">Qwen3-VL Technical Report</a>, <span class="pub-authors">64 core contributors including <b>Zhifang Guo</b>*</span></li>
+        <li><span class="venue">Technical Report 2025</span><a class="pub-title" href="https://arxiv.org/abs/2505.09388">Qwen3 Technical Report</a>, <span class="pub-authors">178 contributors including <b>Zhifang Guo</b></span></li>
+        <li><span class="venue">Technical Report 2025</span><a class="pub-title" href="https://arxiv.org/abs/2502.13923">Qwen2.5-VL Technical Report</a>, <span class="pub-authors">83 contributors including <b>Zhifang Guo</b></span></li>
+        <li><span class="venue">Technical Report 2024</span><a class="pub-title" href="https://arxiv.org/abs/2412.15115">Qwen2.5 Technical Report</a>, <span class="pub-authors">93 contributors including <b>Zhifang Guo</b></span></li>
+        <li><span class="venue">Technical Report 2024</span><a class="pub-title" href="https://arxiv.org/abs/2407.10759">Qwen2-Audio Technical Report</a>, <span class="pub-authors">Yunfei Chu, Jin Xu, Qian Yang, Haojie Wei, Xipin Wei, <b>Zhifang Guo</b>, et al.</span></li>
+        <li><span class="venue">ACL 2025</span><a class="pub-title" href="https://arxiv.org/abs/2503.02769">Inserter: Speech Instruction Following with Unsupervised Interleaved Pre-training</a>, <span class="pub-authors">Dingdong Wang, Jin Xu, Ruihang Chu, <b>Zhifang Guo</b>, et al.</span></li>
+        <li><span class="venue">ACL 2025</span><a class="pub-title" href="https://arxiv.org/abs/2409.19283">Analyzing and Mitigating Inconsistency in Discrete Audio Tokens for Neural Codec Language Models</a>, <span class="pub-authors">Wenrui Liu*, <b>Zhifang Guo</b>*, Jin Xu, Yuanjun Lv, Yunfei Chu, Zhou Zhao, Junyang Lin</span></li>
+        <li><span class="venue">Interspeech 2024</span><a class="pub-title" href="https://arxiv.org/abs/2505.24496">Speech Token Prediction via Compressed-to-fine Language Modeling for Speech Generation</a>, <span class="pub-authors">Wenrui Liu, Qian Chen, Wen Wang, Yafeng Chen, Jin Xu, <b>Zhifang Guo</b>, et al.</span></li>
+        <li><span class="venue">ACM MM 2024 &middot; Oral</span><a class="pub-title" href="https://arxiv.org/abs/2408.07919">Advancing Multi-grained Alignment for Contrastive Language-Audio Pre-training</a>, <span class="pub-authors">Yiming Li, <b>Zhifang Guo</b>, Xiangdong Wang, Hong Liu</span></li>
+        <li><span class="venue">Interspeech 2024</span><a class="pub-title" href="https://arxiv.org/abs/2308.11530">Leveraging Language Model Capabilities for Sound Event Detection</a>, <span class="pub-authors">Hualei Wang, Jianguo Mao, <b>Zhifang Guo</b>, Jiarui Wan, Hong Liu, Xiangdong Wang</span></li>
+        <li><span class="venue">DCASE 2022</span><a class="pub-title" href="https://arxiv.org/abs/2210.09529">A Hybrid System of Sound Event Detection Transformer and Frame-wise Model for DCASE 2022 Task 4</a>, <span class="pub-authors">Yiming Li, <b>Zhifang Guo</b>, Zhirong Ye, Xiangdong Wang, Hong Liu, Yueliang Qian, et al.</span></li>
+      </ul>
+    </section>
+
+    <!-- Honors -->
+    <section id="honors">
+      <h2>🎖 Honors and Awards</h2>
+      <ul class="honor">
+        <li><span class="when">2024</span><span>Outstanding Graduate at the Municipal Level (Beijing)</span></li>
+        <li><span class="when">2024</span><span>Chinese Academy of Sciences Director's Scholarship (Top 1%)</span></li>
+        <li><span class="when">2022</span><span>DCASE 2022 Challenge Task 4 Judges' Award (Sole Recipient)</span></li>
+        <li><span class="when">2022</span><span>University of Chinese Academy of Sciences Academic Excellence Scholarship</span></li>
+        <li><span class="when">2021</span><span>Outstanding Graduate at the University Level</span></li>
+        <li><span class="when">2021</span><span>University of Chinese Academy of Sciences Undergraduate Scholarship; First-Class Scholarship (Top 1%)</span></li>
+        <li><span class="when">2020</span><span>Qi-Anxin Scholarship (Top 1%); First-Class Scholarship (Top 1%)</span></li>
+        <li><span class="when">2019</span><span>Samsung Scholarship (Top 1%); National Scholarship (Top 1%)</span></li>
+        <li><span class="when">2018</span><span>National Scholarship (Top 1%)</span></li>
+      </ul>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <h2>📖 Educations</h2>
+      <div class="edu-item">
+        <div><span class="school">Institute of Computing Technology, Chinese Academy of Sciences</span> <span class="meta">Sep. 2021 -- Jun. 2024</span></div>
+        <div class="meta">M.S. in Computer Science and Technology</div>
+      </div>
+      <div class="edu-item">
+        <div><span class="school">School of Communication Engineering, Jilin University</span> <span class="meta">Sep. 2017 -- Jun. 2021</span></div>
+        <div class="meta">B.S. in Automation Engineering &middot; GPA 3.89/4.00 (Ranked 2nd out of 161)</div>
+      </div>
+    </section>
+
+    <!-- Internships -->
+    <section id="internships">
+      <h2>💼 Internships &amp; Collaborations</h2>
+      <ul class="honor">
+        <li><span class="when">2024</span><span>Multimodal Algorithm Intern, Qwen Audio Team, Alibaba (Supervised by <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=COYDNmYAAAAJ">Jin Xu</a>, led by <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=qp6IwtgAAAAJ">Junyang Lin</a>)</span></li>
+        <li><span class="when">2023</span><span>Audio Algorithm Intern, R&amp;D Center, Toshiba (Led by <a href="https://scholar.google.com/citations?hl=en&amp;user=f4pA3tgAAAAJ">Kazushige Ouchi</a>)</span></li>
+        <li><span class="when">2022</span><span>Speech Algorithm Collaboration, Microsoft Research Asia (Supervised by <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=1jwteOQAAAAJ">Yichong Leng</a>, led by <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=tob-U1oAAAAJ">Xu Tan</a>)</span></li>
+        <li><span class="when">2022</span><span>Speech Algorithm Intern, Meituan (Supervised by Dan Wu, led by <a href="https://scholar.google.com/citations?user=3Ee8X-oAAAAJ&amp;hl=en">Ke Ding</a>)</span></li>
+        <li><span class="when">2022</span><span>NLP Algorithm Intern, Baidu (Supervised by <a href="https://scholar.google.com/citations?user=3uW0U1oAAAAJ&amp;hl=zh-CN">Weiwei Zhang</a>)</span></li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  Last updated: Oct. 2026 &middot; Template inspired by <a href="https://rayeren.github.io/">AcadHomepage</a>.
+</footer>
+
+<script>
+/* ---------------------------------------------------------------------------
+   Live citation data.
+
+   google-scholar-stats/gs_data.json is produced outside the page (GitHub Actions
+   cron -> google_scholar_crawler/main.py). This script re-reads it on load, every
+   REFRESH_MS while the tab stays open, and whenever the tab comes back to the
+   foreground, so an open page keeps converging to the latest crawl.
+   If the file is missing (file:// preview, offline), the static numbers written
+   in the HTML are kept.
+   --------------------------------------------------------------------------- */
+(() => {
+  const num = n => Number(n).toLocaleString('en-US');
+  const REFRESH_MS = 10 * 60 * 1000;   // re-read the JSON every 10 minutes
+
+  let lastFetch = 0; // timestamp of the last successful fetch
+
+  function paint(d) {
+    const when = d.updated ? new Date(d.updated).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : '';
+
+    const bioCit = document.getElementById('bio_cit');
+    if (d.citedby && bioCit) bioCit.textContent = num(d.citedby);
+    if (when && bioCit && bioCit.parentElement) {
+      bioCit.parentElement.title = 'Google Scholar · crawled ' + when + ' · click to open the profile';
+    }
+
+    const pubs = Object.values(d.publications || {});
+    const bioP = document.getElementById('bio_pubs');
+    // if the crawler reports a full publication list, trust it over the page count
+    if (bioP && pubs.length > 0) bioP.textContent = pubs.length;
+
+    const norm = s => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const findPub = title => {
+      const key = norm(title);
+      if (!key) return null;
+      return pubs.find(p => {
+        const t = norm((p.bib || p).title);
+        return t && (t.includes(key) || key.includes(t));
+      }) || null;
+    };
+
+    // citation count rendered as a shields-style badge; the crawler value
+    // replaces the static fallback (a number, or "&mdash;" when unknown)
+    document.querySelectorAll('.paper-cites-badge').forEach(el => {
+      const hit = findPub(el.dataset.title);
+      const val = el.querySelector('.cb-value');
+      if (hit && hit.num_citations != null && val) {
+        val.textContent = num(hit.num_citations);
+        if (when) el.title = num(hit.num_citations) + ' citations on Google Scholar · crawled ' + when;
+      }
+    });
+  }
+
+  function refresh() {
+    return fetch('google-scholar-stats/gs_data.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(r => (r.ok ? r.json() : Promise.reject(new Error('no data'))))
+      .then(d => { paint(d); lastFetch = Date.now(); })
+      .catch(() => { /* keep last known / static numbers */ });
+  }
+
+  // paper count from the page itself, so it tracks entries added/removed by hand
+  const featured = document.querySelectorAll('#publications .paper-box:not(.release)').length; // product releases are not papers
+  const listed = document.querySelectorAll('#publications .pub-list li:not(.release)').length; // product releases are not papers
+  const bioPubs = document.getElementById('bio_pubs');
+  if (bioPubs && featured + listed > 0) bioPubs.textContent = featured + listed;
+
+  refresh();
+  setInterval(refresh, REFRESH_MS);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && Date.now() - lastFetch > REFRESH_MS) refresh();
+  });
+})();
+</script>
+
+</body>
+</html>

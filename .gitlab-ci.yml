@@ -1,0 +1,60 @@
+# CI for the academic homepage.
+#
+#   pages             -> publishes the site on GitLab Pages (default branch)
+#   update_citations  -> crawls Google Scholar and commits the new numbers
+#
+# Enable the crawler by creating a schedule under Build > Pipeline schedules
+# (e.g. every 30 minutes) and adding a project access token with write_repository
+# as the masked CI/CD variable GITLAB_PUSH_TOKEN.
+
+stages:
+  - build
+  - deploy
+
+# ---------------------------------------------------------------------------
+# Google Scholar crawler (scheduled or manually triggered from the web UI)
+# ---------------------------------------------------------------------------
+update_citations:
+  stage: build
+  image: python:3.11-slim
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule" || $CI_PIPELINE_SOURCE == "web"'
+  script:
+    - pip install --no-cache-dir -r google_scholar_crawler/requirements.txt
+    - cd google_scholar_crawler && python main.py && cd ..
+    - mkdir -p google-scholar-stats
+    - cp google_scholar_crawler/results/gs_data.json google-scholar-stats/
+    - cp google_scholar_crawler/results/gs_data_shieldsio.json google-scholar-stats/
+    - git config user.name "gitlab-ci"
+    - git config user.email "ci@gitlab.com"
+    - git add google-scholar-stats
+    - |
+      if git diff --staged --quiet; then
+        echo "No citation changes."
+      elif [ -n "$GITLAB_PUSH_TOKEN" ]; then
+        git commit -m "chore: refresh Google Scholar citation data"
+        git push "https://oauth2:${GITLAB_PUSH_TOKEN}@gitlab.com/${CI_PROJECT_PATH}.git" "HEAD:${CI_COMMIT_REF_NAME}"
+      else
+        echo "GITLAB_PUSH_TOKEN is not set - numbers refreshed for this run only."
+      fi
+  artifacts:
+    paths:
+      - google-scholar-stats/
+    expire_in: 1 week
+  allow_failure: true
+
+# ---------------------------------------------------------------------------
+# Pages: the whole folder is static, so just copy it into public/
+# ---------------------------------------------------------------------------
+pages:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - mkdir -p public
+    - cp -r index.html assets google-scholar-stats README.md public/
+    - ls -la public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

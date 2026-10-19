@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+google_scholar_crawler/results/
+.DS_Store
+Thumbs.db
