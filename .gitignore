@@ -3,3 +3,4 @@ __pycache__/
 google_scholar_crawler/results/
 .DS_Store
 Thumbs.db
+gs_new.json
