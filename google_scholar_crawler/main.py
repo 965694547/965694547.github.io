@@ -239,16 +239,9 @@ def write_outputs(data, shieldsio):
         os.replace(tmp_path, os.path.join(RESULTS_DIR, name))
 
 
-def emit_failure():
-    """Record the failure in the public JSON and exit 0 so the workflow can
-    still deploy it. The reason becomes readable at
-    https://<site>/google-scholar-stats/gs_data.json
-
-    The last good snapshot is reused when this run produced nothing: results/ is
-    gitignored, so on a fresh checkout a failed crawl would otherwise publish
-    zeros and wipe every badge on the page.
-    """
-    previous = {}
+def last_good_snapshot():
+    """The most recent snapshot with real publications: results/ first (same
+    run), then the committed copy that the site serves."""
     for candidate in (
         os.path.join(RESULTS_DIR, "gs_data.json"),
         os.path.join("..", "google-scholar-stats", "gs_data.json"),
@@ -261,12 +254,29 @@ def emit_failure():
         except Exception:  # noqa: BLE001
             continue
         if (loaded.get("publications") or {}):
-            previous = loaded
-            break
+            return loaded
+    return {}
+
+
+def emit_failure(extra=None):
+    """Record the failure in the public JSON and exit 0 so the workflow can
+    still deploy it. The reason becomes readable at
+    https://<site>/google-scholar-stats/gs_data.json
+
+    The last good snapshot is reused when this run produced nothing: results/ is
+    gitignored, so on a fresh checkout a failed crawl would otherwise publish
+    zeros and wipe every badge on the page.
+    """
+    previous = last_good_snapshot()
     previous.setdefault("citedby", 0)
     previous.setdefault("publications", {})
     previous["updated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    previous["crawl_status"] = "failed"
+    if extra:
+        # profile unavailable, but the fallback numbers still refreshed
+        previous["extra"] = extra
+        previous["crawl_status"] = "partial"
+    else:
+        previous["crawl_status"] = "failed"
     previous["last_error"] = ("; ".join(ERRORS[-4:]) or "unexpected crash") + " at " + previous["updated"]
     write_outputs(previous, {
         "schemaVersion": 1,
@@ -293,7 +303,8 @@ def main():
     finally:
         disarm()
     if author is None:
-        emit_failure()
+        # keep the last good profile numbers, but still refresh the fallback ones
+        emit_failure(fetch_openalex({}))
 
     publications = {}
     for pub in author.get("publications", []):
