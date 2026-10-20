@@ -1,6 +1,7 @@
 # Zhifang Guo — Academic Homepage
 
-Personal academic homepage hosted at **https://965694547.github.io** (currently unpublished).
+Personal academic homepage of **Zhifang Guo (郭智方)** — Multimodal Algorithm Researcher at the
+Qwen Team, Alibaba Group — live at **https://965694547.github.io/**.
 
 Style inspired by [Yi Ren's homepage](https://rayeren.github.io/) (AcadHomepage), implemented as a
 single static `index.html` — no Jekyll build required, GitHub Pages serves it directly from `main`.
@@ -44,3 +45,20 @@ single static `index.html` — no Jekyll build required, GitHub Pages serves it 
 python -m http.server 8000
 # open http://localhost:8000
 ```
+
+## Search engine indexing
+
+The page is meant to be findable by both **Zhifang Guo** and **郭智方**.
+
+- `index.html` head: bilingual `<title>`, `description`, `keywords`, `author`, Open Graph
+  (`og:locale: zh_CN`), and a schema.org `Person` block with `alternateName`
+  (`郭智方`, `Guo Zhifang`, `Zhi-Fang Guo`) plus `alumniOf` / `worksFor` / `knowsAbout`.
+- `robots.txt` explicitly allows `Baiduspider`, `Sogou web spider`, `360Spider`, `YisouSpider`,
+  `Bytespider` next to the international crawlers; it points at `sitemap.xml`.
+- `9907702c613dcd9660ac922225fb6285.txt` is the IndexNow key: after every content change, POST
+  `{"host":"965694547.github.io","key":"...","keyLocation":"...","urlList":["https://965694547.github.io/"]}`
+  to `api.indexnow.org/indexnow` (Bing / Yandex / Naver / Seznam all consume it).
+- Google: verification meta is in the head; sitemap submission and "request indexing" are done in
+  Search Console.
+- 百度 / 360 / 搜狗 have no open API — the site has to be added once in each webmaster console
+  (`ziyuan.baidu.com`, `zhanzhang.so.com`, `zhanzhang.sogou.com`) and the sitemap submitted there.
