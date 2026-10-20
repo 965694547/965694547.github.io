@@ -1,12 +1,12 @@
 {
-  "citedby": 36292,
+  "citedby": 36294,
   "hindex": 33,
   "i10index": 43,
-  "citedby5y": 36277,
+  "citedby5y": 36279,
   "name": "Zhifang Guo",
   "affiliation": "Institute of Computing Technology Chinese Academy of Sciences",
-  "updated": "2026-10-20T09:39:20+00:00",
-  "crawl_status": "partial",
+  "updated": "2026-10-20T14:49:00+00:00",
+  "crawl_status": "ok",
   "publications": {
     "LHzzlAgAAAAJ:YsMSGLbcyi4C": {
       "title": "Qwen3 technical report",
@@ -273,6 +273,11 @@
       "year": "2022",
       "num_citations": 3
     },
+    "LHzzlAgAAAAJ:GnPB-g6toBAC": {
+      "title": "Qwen3. 8-Omni: Towards Native Omni-Modal Agents",
+      "year": "2026",
+      "num_citations": 2
+    },
     "LHzzlAgAAAAJ:JV2RwH3_ST0C": {
       "title": "Qwen-Audio-VAE Technical Report",
       "year": "2026",
@@ -331,15 +336,14 @@
   },
   "extra": {
     "Qwen3.8-Omni: Towards Native Omni-Modal Agents": {
-      "title": "Qwen3.8-Omni: Towards Native Omni-Modal Agents",
-      "num_citations": 0,
-      "source": "openalex"
+      "title": "Qwen3. 8-Omni: Towards Native Omni-Modal Agents",
+      "num_citations": 2,
+      "source": "scholar"
     },
     "Qwen3.5-Omni Technical Report": {
       "title": "Qwen3.5-Omni Technical Report",
       "num_citations": 6,
       "source": "openalex"
     }
-  },
-  "last_error": "direct#2: MaxTriesExceededException: Cannot Fetch from Google Scholar.; direct#3: MaxTriesExceededException: Cannot Fetch from Google Scholar.; free-proxy#1: TypeError: Client.__init__() got an unexpected keyword argument 'proxies'; free-proxy#2: TypeError: Client.__init__() got an unexpected keyword argument 'proxies' at 2026-10-20T09:39:20+00:00"
+  }
 }
