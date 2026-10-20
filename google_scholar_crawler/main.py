@@ -59,6 +59,11 @@ EXTRA_ATTEMPTS = 2
 EXTRA_BUDGET = 780      # give up on title searches this long after start (job is 20 min)
 START_TS = time.time()
 
+# OpenAlex is the last resort: it covers fresh arXiv reports that Scholar has not
+# merged into the profile yet, and unlike Scholar it never blocks the runner.
+OPENALEX_API = "https://api.openalex.org/works"
+OPENALEX_MAILTO = os.environ.get("OPENALEX_MAILTO", "A6769408@hotmail.com")
+
 RESULTS_DIR = "results"
 ERRORS = []
 
@@ -164,6 +169,7 @@ def fetch_extra():
                             hit = {
                                 "title": bib.get("title", ""),
                                 "num_citations": res.get("num_citations", 0),
+                                "source": "scholar",
                             }
                             break
                     break
@@ -185,9 +191,42 @@ def fetch_extra():
             disarm()
         if hit:
             extra[title] = hit
-            print("[extra] {} -> {} citations".format(title[:50], hit["num_citations"]))
+            print("[extra] {} -> {} citations (scholar)".format(title[:50], hit["num_citations"]))
         else:
             print("[extra] {} -> no strict match".format(title[:50]))
+    return extra
+
+
+def fetch_openalex(extra):
+    """Fill the still-missing titles from OpenAlex (source is recorded per entry
+    so the page can label where a number came from)."""
+    missing = [t for t in EXTRA_TITLES if t not in extra]
+    for title in missing:
+        if time.time() - START_TS > EXTRA_BUDGET + 120:
+            print("[openalex] skipped (budget): " + title[:50])
+            break
+        wanted = norm_title(title)
+        try:
+            resp = requests.get(
+                OPENALEX_API,
+                params={"search": title, "per-page": 5, "mailto": OPENALEX_MAILTO},
+                timeout=25,
+            )
+            for work in (resp.json().get("results") or [])[:5]:
+                if title_matches(wanted, work.get("title", "")):
+                    extra[title] = {
+                        "title": work.get("title", ""),
+                        "num_citations": work.get("cited_by_count", 0),
+                        "source": "openalex",
+                    }
+                    print("[openalex] {} -> {} citations".format(title[:50], work.get("cited_by_count", 0)))
+                    break
+            else:
+                print("[openalex] {} -> no strict match".format(title[:50]))
+        except Exception as exc:  # noqa: BLE001
+            msg = "openalex {}: {}: {}".format(title[:40], type(exc).__name__, str(exc)[:120])
+            print("[openalex] " + msg)
+            ERRORS.append(msg)
     return extra
 
 
@@ -266,6 +305,7 @@ def main():
         }
 
     extra = fetch_extra()
+    extra = fetch_openalex(extra)
 
     data = {
         "citedby": author.get("citedby", 0),

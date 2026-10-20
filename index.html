@@ -661,12 +661,13 @@
         return false;
       }) || null;
     };
-    // profile first, then the title-search fallback
+    // profile first, then the crawler's fallbacks (Scholar paper page -> OpenAlex)
     const lookup = title => {
       const hit = findPub(title);
       if (hit && hit.num_citations != null) return { value: hit.num_citations, viaProfile: true };
       const fb = findExtra(title);
-      return fb && fb.num_citations != null ? { value: fb.num_citations, viaProfile: false } : null;
+      if (!fb || fb.num_citations == null) return null;
+      return { value: fb.num_citations, viaProfile: false, source: fb.source || 'scholar' };
     };
 
     // citation count rendered as a shields-style badge; the crawler value
@@ -677,9 +678,12 @@
       if (hit && val) {
         val.textContent = num(hit.value);
         if (when) {
-          el.title = num(hit.value) + ' citations on Google Scholar'
-            + (hit.viaProfile ? '' : ' (paper page, not merged into the profile yet)')
-            + ' · crawled ' + when;
+          const src = hit.viaProfile
+            ? 'Google Scholar'
+            : (hit.source === 'openalex'
+              ? 'OpenAlex (this report is not on the Scholar profile yet)'
+              : 'Google Scholar paper page (not merged into the profile yet)');
+          el.title = num(hit.value) + ' citations · ' + src + ' · crawled ' + when;
         }
       } else if (val) {
         el.title = 'Not indexed by Google Scholar yet — the count fills in automatically once it is';
