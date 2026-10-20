@@ -45,6 +45,16 @@ SCHOLAR_ID = os.environ.get("GOOGLE_SCHOLAR_ID", "LHzzlAgAAAAJ")
 ATTEMPTS_DIRECT = 3
 ATTEMPTS_PROXY = 2
 
+# Papers that are published on Google Scholar but not (yet) merged into the
+# author profile. They are looked up by title search instead, and the result is
+# emitted under data["extra"] so the page can fall back to it.
+EXTRA_TITLES = [
+    "Qwen3.8-Omni: Towards Native Omni-Modal Agents",
+    "Qwen3.5-Omni Technical Report",
+]
+EXTRA_SCAN = 8          # how many search hits to inspect per title
+EXTRA_ATTEMPTS = 2
+
 RESULTS_DIR = "results"
 ERRORS = []
 
@@ -74,6 +84,61 @@ def run_with_retries(fn, attempts, label):
             if attempt < attempts:
                 time.sleep(15 * attempt + random.randint(0, 15))
     return None
+
+
+def norm_title(value):
+    return "".join(ch for ch in (value or "").lower() if ch.isalnum())
+
+
+def title_matches(wanted_key, found_title):
+    """Strict title comparison, mirroring the page's matching rule."""
+    key = norm_title(found_title)
+    if not key:
+        return False
+    if key == wanted_key:
+        return True
+    if wanted_key in key or key in wanted_key:
+        return len(key) >= max(12, len(wanted_key) * 0.6)
+    return False
+
+
+def fetch_extra():
+    """Look up profile-missing papers through Scholar's title search.
+
+    Never fatal: a blocked / empty search only means the page keeps showing "—".
+    """
+    extra = {}
+    for title in EXTRA_TITLES:
+        wanted = norm_title(title)
+        hit = None
+        for attempt in range(1, EXTRA_ATTEMPTS + 1):
+            try:
+                results = scholarly.search_pubs(title)
+                for idx, res in enumerate(results):
+                    if idx >= EXTRA_SCAN:
+                        break
+                    bib = res.get("bib") or {}
+                    if title_matches(wanted, bib.get("title", "")):
+                        hit = {
+                            "title": bib.get("title", ""),
+                            "num_citations": res.get("num_citations", 0),
+                        }
+                        break
+                break
+            except Exception as exc:  # noqa: BLE001
+                msg = "extra-search {}#{}: {}: {}".format(
+                    title[:40], attempt, type(exc).__name__, str(exc)[:160]
+                )
+                print("[extra] " + msg)
+                ERRORS.append(msg)
+                if attempt < EXTRA_ATTEMPTS:
+                    time.sleep(10 * attempt + random.randint(0, 10))
+        if hit:
+            extra[title] = hit
+            print("[extra] {} -> {} citations".format(title[:50], hit["num_citations"]))
+        else:
+            print("[extra] {} -> no strict match".format(title[:50]))
+    return extra
 
 
 def write_outputs(data, shieldsio):
@@ -128,6 +193,8 @@ def main():
             "num_citations": pub.get("num_citations", 0),
         }
 
+    extra = fetch_extra()
+
     data = {
         "citedby": author.get("citedby", 0),
         "hindex": author.get("hindex", 0),
@@ -138,6 +205,7 @@ def main():
         "updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "crawl_status": "ok",
         "publications": publications,
+        "extra": extra,
     }
 
     # same number in the format shields.io/endpoint understands, so a plain
@@ -153,10 +221,11 @@ def main():
 
     write_outputs(data, shieldsio)
     print(
-        "citedby={citedby} hindex={hindex} publications={n} at {updated}".format(
+        "citedby={citedby} hindex={hindex} publications={n} extra={e} at {updated}".format(
             citedby=data["citedby"],
             hindex=data["hindex"],
             n=len(publications),
+            e=len(extra),
             updated=data["updated"],
         )
     )

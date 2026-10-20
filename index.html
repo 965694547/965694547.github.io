@@ -647,14 +647,40 @@
       }) || null;
     };
 
+    // papers published on Scholar but not yet merged into the author profile are
+    // looked up by the crawler's title search and arrive under d.extra
+    const extras = Object.values(d.extra || {});
+    const findExtra = title => {
+      const key = norm(title);
+      if (!key) return null;
+      return extras.find(p => {
+        const t = norm(p.title || '');
+        if (!t) return false;
+        if (t === key) return true;
+        if (t.includes(key) || key.includes(t)) return t.length >= Math.max(12, key.length * 0.6);
+        return false;
+      }) || null;
+    };
+    // profile first, then the title-search fallback
+    const lookup = title => {
+      const hit = findPub(title);
+      if (hit && hit.num_citations != null) return { value: hit.num_citations, viaProfile: true };
+      const fb = findExtra(title);
+      return fb && fb.num_citations != null ? { value: fb.num_citations, viaProfile: false } : null;
+    };
+
     // citation count rendered as a shields-style badge; the crawler value
     // replaces the static fallback (a number, or "&mdash;" when unknown)
     document.querySelectorAll('.paper-cites-badge').forEach(el => {
-      const hit = findPub(el.dataset.title);
+      const hit = lookup(el.dataset.title);
       const val = el.querySelector('.cb-value');
-      if (hit && hit.num_citations != null && val) {
-        val.textContent = num(hit.num_citations);
-        if (when) el.title = num(hit.num_citations) + ' citations on Google Scholar · crawled ' + when;
+      if (hit && val) {
+        val.textContent = num(hit.value);
+        if (when) {
+          el.title = num(hit.value) + ' citations on Google Scholar'
+            + (hit.viaProfile ? '' : ' (paper page, not merged into the profile yet)')
+            + ' · crawled ' + when;
+        }
       } else if (val) {
         el.title = 'Not indexed by Google Scholar yet — the count fills in automatically once it is';
       }
@@ -668,8 +694,8 @@
        'Qwen3.5-Omni Technical Report',
        'Qwen3-Omni Technical Report',
        'Qwen2.5-Omni Technical Report'].forEach(t => {
-        const hit = findPub(t);
-        if (hit && hit.num_citations != null) sum += hit.num_citations;
+        const hit = lookup(t);
+        if (hit) sum += hit.value;
       });
       if (sum > 0) {
         const v = omniCit.querySelector('.cb-value');
