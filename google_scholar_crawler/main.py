@@ -90,8 +90,13 @@ def run_with_retries(fn, attempts, label):
     return None
 
 
-class BudgetExceeded(Exception):
-    """Raised when a phase takes longer than its wall-clock budget."""
+class BudgetExceeded(BaseException):
+    """Raised when a phase takes longer than its wall-clock budget.
+
+    Deliberately a BaseException: the retry helpers catch Exception broadly so
+    they can absorb network/captcha errors, and a deadline must never be
+    swallowed by one of those retries.
+    """
 
 
 def _on_alarm(signum, frame):  # noqa: ARG001
@@ -302,6 +307,10 @@ try:
     main()
 except SystemExit:
     raise
+except BudgetExceeded:
+    # a deadline escaped its phase (e.g. raised while unwinding a retry helper)
+    ERRORS.append("TIMEOUT: " + traceback.format_exc()[-500:])
+    emit_failure()
 except Exception:  # noqa: BLE001 - never let the pipeline go red without a record
     ERRORS.append("CRASH: " + traceback.format_exc()[-500:])
     emit_failure()
