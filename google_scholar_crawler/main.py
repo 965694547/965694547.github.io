@@ -19,6 +19,7 @@ Resilience strategy:
 import json
 import os
 import random
+import signal
 import sys
 import time
 import traceback
@@ -44,6 +45,7 @@ from scholarly import scholarly  # noqa: E402  (needs the timeout patch first)
 SCHOLAR_ID = os.environ.get("GOOGLE_SCHOLAR_ID", "LHzzlAgAAAAJ")
 ATTEMPTS_DIRECT = 3
 ATTEMPTS_PROXY = 2
+PROFILE_BUDGET = 600    # seconds; a blocked profile fetch otherwise burns the 20 min job
 
 # Papers that are published on Google Scholar but not (yet) merged into the
 # author profile. They are looked up by title search instead, and the result is
@@ -88,6 +90,31 @@ def run_with_retries(fn, attempts, label):
     return None
 
 
+class BudgetExceeded(Exception):
+    """Raised when a phase takes longer than its wall-clock budget."""
+
+
+def _on_alarm(signum, frame):  # noqa: ARG001
+    raise BudgetExceeded("wall-clock budget exceeded")
+
+
+def arm(seconds):
+    """Hard deadline for the current phase (POSIX only; no-op elsewhere)."""
+    try:
+        signal.signal(signal.SIGALRM, _on_alarm)
+        signal.alarm(int(seconds))
+        return True
+    except (AttributeError, ValueError):
+        return False
+
+
+def disarm():
+    try:
+        signal.alarm(0)
+    except (AttributeError, ValueError):
+        pass
+
+
 def norm_title(value):
     return "".join(ch for ch in (value or "").lower() if ch.isalnum())
 
@@ -119,28 +146,38 @@ def fetch_extra():
             break
         wanted = norm_title(title)
         hit = None
-        for attempt in range(1, EXTRA_ATTEMPTS + 1):
-            try:
-                results = scholarly.search_pubs(title)
-                for idx, res in enumerate(results):
-                    if idx >= EXTRA_SCAN:
-                        break
-                    bib = res.get("bib") or {}
-                    if title_matches(wanted, bib.get("title", "")):
-                        hit = {
-                            "title": bib.get("title", ""),
-                            "num_citations": res.get("num_citations", 0),
-                        }
-                        break
-                break
-            except Exception as exc:  # noqa: BLE001
-                msg = "extra-search {}#{}: {}: {}".format(
-                    title[:40], attempt, type(exc).__name__, str(exc)[:160]
-                )
-                print("[extra] " + msg)
-                ERRORS.append(msg)
-                if attempt < EXTRA_ATTEMPTS:
-                    time.sleep(10 * attempt + random.randint(0, 10))
+        arm(150)  # one title: search + at most EXTRA_SCAN hits
+        try:
+            for attempt in range(1, EXTRA_ATTEMPTS + 1):
+                try:
+                    results = scholarly.search_pubs(title)
+                    for idx, res in enumerate(results):
+                        if idx >= EXTRA_SCAN:
+                            break
+                        bib = res.get("bib") or {}
+                        if title_matches(wanted, bib.get("title", "")):
+                            hit = {
+                                "title": bib.get("title", ""),
+                                "num_citations": res.get("num_citations", 0),
+                            }
+                            break
+                    break
+                except BudgetExceeded:
+                    raise
+                except Exception as exc:  # noqa: BLE001
+                    msg = "extra-search {}#{}: {}: {}".format(
+                        title[:40], attempt, type(exc).__name__, str(exc)[:160]
+                    )
+                    print("[extra] " + msg)
+                    ERRORS.append(msg)
+                    if attempt < EXTRA_ATTEMPTS:
+                        time.sleep(10 * attempt + random.randint(0, 10))
+        except BudgetExceeded:
+            msg = "extra-search timed out: " + title[:40]
+            print("[extra] " + msg)
+            ERRORS.append(msg)
+        finally:
+            disarm()
         if hit:
             extra[title] = hit
             print("[extra] {} -> {} citations".format(title[:50], hit["num_citations"]))
@@ -161,15 +198,27 @@ def write_outputs(data, shieldsio):
 def emit_failure():
     """Record the failure in the public JSON and exit 0 so the workflow can
     still deploy it. The reason becomes readable at
-    https://<site>/google-scholar-stats/gs_data.json"""
-    fallback_path = os.path.join(RESULTS_DIR, "gs_data.json")
+    https://<site>/google-scholar-stats/gs_data.json
+
+    The last good snapshot is reused when this run produced nothing: results/ is
+    gitignored, so on a fresh checkout a failed crawl would otherwise publish
+    zeros and wipe every badge on the page.
+    """
     previous = {}
-    if os.path.exists(fallback_path):
+    for candidate in (
+        os.path.join(RESULTS_DIR, "gs_data.json"),
+        os.path.join("..", "google-scholar-stats", "gs_data.json"),
+    ):
+        if not os.path.exists(candidate):
+            continue
         try:
-            with open(fallback_path, encoding="utf-8") as fh:
-                previous = json.load(fh)
+            with open(candidate, encoding="utf-8") as fh:
+                loaded = json.load(fh)
         except Exception:  # noqa: BLE001
-            previous = {}
+            continue
+        if (loaded.get("publications") or {}):
+            previous = loaded
+            break
     previous.setdefault("citedby", 0)
     previous.setdefault("publications", {})
     previous["updated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -186,9 +235,19 @@ def emit_failure():
 
 
 def main():
-    author = run_with_retries(fetch_profile, ATTEMPTS_DIRECT, "direct")
-    if author is None:
-        author = run_with_retries(fetch_profile_via_free_proxies, ATTEMPTS_PROXY, "free-proxy")
+    author = None
+    arm(PROFILE_BUDGET)
+    try:
+        author = run_with_retries(fetch_profile, ATTEMPTS_DIRECT, "direct")
+        if author is None:
+            author = run_with_retries(fetch_profile_via_free_proxies, ATTEMPTS_PROXY, "free-proxy")
+    except BudgetExceeded:
+        msg = "profile fetch exceeded {}s budget".format(PROFILE_BUDGET)
+        print("[profile] " + msg)
+        ERRORS.append(msg)
+        author = None
+    finally:
+        disarm()
     if author is None:
         emit_failure()
 
