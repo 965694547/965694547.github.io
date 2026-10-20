@@ -54,6 +54,8 @@ EXTRA_TITLES = [
 ]
 EXTRA_SCAN = 8          # how many search hits to inspect per title
 EXTRA_ATTEMPTS = 2
+EXTRA_BUDGET = 780      # give up on title searches this long after start (job is 20 min)
+START_TS = time.time()
 
 RESULTS_DIR = "results"
 ERRORS = []
@@ -109,6 +111,12 @@ def fetch_extra():
     """
     extra = {}
     for title in EXTRA_TITLES:
+        elapsed = time.time() - START_TS
+        if elapsed > EXTRA_BUDGET:
+            msg = "extra-search skipped (budget): " + title[:40]
+            print("[extra] " + msg)
+            ERRORS.append(msg)
+            break
         wanted = norm_title(title)
         hit = None
         for attempt in range(1, EXTRA_ATTEMPTS + 1):

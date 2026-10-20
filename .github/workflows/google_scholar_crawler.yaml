@@ -35,7 +35,7 @@ jobs:
           GOOGLE_SCHOLAR_ID: LHzzlAgAAAAJ
         run: |
           cd google_scholar_crawler
-          python main.py 2>&1 | tee crawl_output.txt
+          python -u main.py 2>&1 | tee crawl_output.txt
           exit ${PIPESTATUS[0]}
 
       - name: Commit refreshed data
