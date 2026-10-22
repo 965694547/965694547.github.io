@@ -1,27 +1,27 @@
 {
-  "citedby": 36216,
+  "citedby": 36459,
   "hindex": 33,
   "i10index": 43,
-  "citedby5y": 36201,
+  "citedby5y": 36442,
   "name": "Zhifang Guo",
   "affiliation": "Institute of Computing Technology Chinese Academy of Sciences",
-  "updated": "2026-10-22T05:24:30+00:00",
-  "crawl_status": "partial",
+  "updated": "2026-10-22T10:29:12+00:00",
+  "crawl_status": "ok",
   "publications": {
     "LHzzlAgAAAAJ:YsMSGLbcyi4C": {
       "title": "Qwen3 technical report",
       "year": "2025",
-      "num_citations": 15419
+      "num_citations": 15615
     },
     "LHzzlAgAAAAJ:_FxGoFyzp5QC": {
       "title": "Qwen3-vl technical report",
       "year": "2025",
-      "num_citations": 11231
+      "num_citations": 11244
     },
     "LHzzlAgAAAAJ:r0BpntZqJG4C": {
       "title": "Qwen3-omni technical report",
       "year": "2025",
-      "num_citations": 1770
+      "num_citations": 1774
     },
     "LHzzlAgAAAAJ:4DMP91E08xMC": {
       "title": "Qwen3 technical report, 2025",
@@ -31,27 +31,27 @@
     "LHzzlAgAAAAJ:qjMakFHDy7sC": {
       "title": "Qwen2-audio technical report",
       "year": "2024",
-      "num_citations": 1168
+      "num_citations": 1171
     },
     "LHzzlAgAAAAJ:qUcmZB5y_30C": {
       "title": "Qwen3 technical report, 2025",
       "year": "2025",
-      "num_citations": 781
+      "num_citations": 783
     },
     "LHzzlAgAAAAJ:iH-uZ7U-co4C": {
       "title": "Qwen3. 5: Towards native multimodal agents, February 2026",
       "year": "2026",
-      "num_citations": 565
+      "num_citations": 578
     },
     "LHzzlAgAAAAJ:k_IJM867U9cC": {
       "title": "Qwen3-vl technical report, 2025",
       "year": "2025",
-      "num_citations": 474
+      "num_citations": 476
     },
     "LHzzlAgAAAAJ:bEWYMUwI8FkC": {
       "title": "others. 2025. Qwen3-vl technical report",
       "year": "45",
-      "num_citations": 472
+      "num_citations": 474
     },
     "LHzzlAgAAAAJ:2osOgNQ5qMEC": {
       "title": "Prompttts: Controllable text-to-speech with text descriptions",
@@ -63,20 +63,20 @@
       "year": "1",
       "num_citations": 228
     },
-    "LHzzlAgAAAAJ:TFP_iSt0sucC": {
-      "title": "Qwen3-tts technical report",
-      "year": "2026",
-      "num_citations": 194
-    },
     "LHzzlAgAAAAJ:isC4tDSrTZIC": {
       "title": "Qwen3-asr technical report",
       "year": "2026",
-      "num_citations": 193
+      "num_citations": 195
+    },
+    "LHzzlAgAAAAJ:TFP_iSt0sucC": {
+      "title": "Qwen3-tts technical report",
+      "year": "2026",
+      "num_citations": 195
     },
     "LHzzlAgAAAAJ:dhFuZR0502QC": {
       "title": "Qwen3",
       "year": "2025",
-      "num_citations": 166
+      "num_citations": 167
     },
     "LHzzlAgAAAAJ:j3f4tGmQtD8C": {
       "title": "Qwen2. 5-vl",
@@ -131,7 +131,7 @@
     "LHzzlAgAAAAJ:hC7cP41nSMkC": {
       "title": "Qwen3, April 2025",
       "year": null,
-      "num_citations": 72
+      "num_citations": 73
     },
     "LHzzlAgAAAAJ:maZDTaKrznsC": {
       "title": "Qwen2 technical report, 2024a",
@@ -178,14 +178,14 @@
       "year": "2025",
       "num_citations": 26
     },
-    "LHzzlAgAAAAJ:Se3iqnhoufwC": {
-      "title": "Qwen2 technical report. CoRR abs/2407.10671 (2024)",
-      "year": "2024",
-      "num_citations": 19
-    },
     "LHzzlAgAAAAJ:hMod-77fHWUC": {
       "title": "others. 2025c",
       "year": "19",
+      "num_citations": 21
+    },
+    "LHzzlAgAAAAJ:Se3iqnhoufwC": {
+      "title": "Qwen2 technical report. CoRR abs/2407.10671 (2024)",
+      "year": "2024",
       "num_citations": 19
     },
     "LHzzlAgAAAAJ:aqlVkmm33-oC": {
@@ -193,13 +193,13 @@
       "year": "2025",
       "num_citations": 17
     },
-    "LHzzlAgAAAAJ:Tyk-4Ss8FVUC": {
-      "title": "Analyzing and mitigating inconsistency in discrete speech tokens for neural codec language models",
-      "year": "2025",
-      "num_citations": 15
-    },
     "LHzzlAgAAAAJ:mVmsd5A6BfQC": {
       "title": "Qwen3, 2025",
+      "year": "2025",
+      "num_citations": 16
+    },
+    "LHzzlAgAAAAJ:Tyk-4Ss8FVUC": {
+      "title": "Analyzing and mitigating inconsistency in discrete speech tokens for neural codec language models",
       "year": "2025",
       "num_citations": 15
     },
@@ -336,15 +336,14 @@
   },
   "extra": {
     "Qwen3.8-Omni: Towards Native Omni-Modal Agents": {
-      "title": "Qwen3.8-Omni: Towards Native Omni-Modal Agents",
-      "num_citations": 0,
-      "source": "openalex"
+      "title": "Qwen3. 8-Omni: Towards Native Omni-Modal Agents",
+      "num_citations": 2,
+      "source": "scholar"
     },
     "Qwen3.5-Omni Technical Report": {
-      "title": "Qwen3.5-Omni Technical Report",
-      "num_citations": 6,
-      "source": "openalex"
+      "title": "Qwen3. 5-omni technical report",
+      "num_citations": 320,
+      "source": "scholar"
     }
-  },
-  "last_error": "profile fetch exceeded 600s budget at 2026-10-22T05:24:30+00:00"
+  }
 }
