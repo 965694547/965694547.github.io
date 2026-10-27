@@ -1,52 +1,52 @@
 {
-  "citedby": 36927,
+  "citedby": 37042,
   "hindex": 33,
   "i10index": 43,
-  "citedby5y": 36910,
+  "citedby5y": 37025,
   "name": "Zhifang Guo",
   "affiliation": "Institute of Computing Technology Chinese Academy of Sciences",
-  "updated": "2026-10-27T10:58:45+00:00",
-  "crawl_status": "partial",
+  "updated": "2026-10-27T16:16:18+00:00",
+  "crawl_status": "ok",
   "publications": {
     "LHzzlAgAAAAJ:YsMSGLbcyi4C": {
       "title": "Qwen3 technical report",
       "year": "2025",
-      "num_citations": 15803
+      "num_citations": 15845
     },
     "LHzzlAgAAAAJ:_FxGoFyzp5QC": {
       "title": "Qwen3-vl technical report",
       "year": "2025",
-      "num_citations": 11377
+      "num_citations": 11417
     },
     "LHzzlAgAAAAJ:r0BpntZqJG4C": {
       "title": "Qwen3-omni technical report",
       "year": "2025",
-      "num_citations": 1810
+      "num_citations": 1819
     },
     "LHzzlAgAAAAJ:4DMP91E08xMC": {
       "title": "Qwen3 technical report, 2025",
       "year": "2025",
-      "num_citations": 1520
+      "num_citations": 1526
     },
     "LHzzlAgAAAAJ:qjMakFHDy7sC": {
       "title": "Qwen2-audio technical report",
       "year": "2024",
-      "num_citations": 1182
+      "num_citations": 1183
     },
     "LHzzlAgAAAAJ:qUcmZB5y_30C": {
       "title": "Qwen3 technical report, 2025",
       "year": "2025",
-      "num_citations": 786
+      "num_citations": 788
     },
     "LHzzlAgAAAAJ:iH-uZ7U-co4C": {
       "title": "Qwen3. 5: Towards native multimodal agents, February 2026",
       "year": "2026",
-      "num_citations": 594
+      "num_citations": 600
     },
     "LHzzlAgAAAAJ:bEWYMUwI8FkC": {
       "title": "others. 2025. Qwen3-vl technical report",
       "year": "45",
-      "num_citations": 486
+      "num_citations": 488
     },
     "LHzzlAgAAAAJ:k_IJM867U9cC": {
       "title": "Qwen3-vl technical report, 2025",
@@ -56,7 +56,7 @@
     "LHzzlAgAAAAJ:2osOgNQ5qMEC": {
       "title": "Prompttts: Controllable text-to-speech with text descriptions",
       "year": "2023",
-      "num_citations": 284
+      "num_citations": 285
     },
     "LHzzlAgAAAAJ:Wp0gIr-vW9MC": {
       "title": "others. 2024a",
@@ -71,7 +71,7 @@
     "LHzzlAgAAAAJ:TFP_iSt0sucC": {
       "title": "Qwen3-tts technical report",
       "year": "2026",
-      "num_citations": 201
+      "num_citations": 203
     },
     "LHzzlAgAAAAJ:dhFuZR0502QC": {
       "title": "Qwen3",
@@ -86,7 +86,7 @@
     "LHzzlAgAAAAJ:hFOr9nPyWt4C": {
       "title": "Qwen3: Think deeper, act faster",
       "year": "2025",
-      "num_citations": 157
+      "num_citations": 158
     },
     "LHzzlAgAAAAJ:4JMBOYKVnBMC": {
       "title": "Qwen2. 5-vl, January 2025",
@@ -116,7 +116,7 @@
     "LHzzlAgAAAAJ:HDshCWvjkbEC": {
       "title": "Qwen3 technical report. CoRR, abs/2505.09388, 2025. doi: 10.48550",
       "year": null,
-      "num_citations": 84
+      "num_citations": 85
     },
     "LHzzlAgAAAAJ:kNdYIx-mwKoC": {
       "title": "others. 2025. Qwen2. 5-omni technical report",
@@ -161,7 +161,7 @@
     "LHzzlAgAAAAJ:UeHWp8X0CEIC": {
       "title": "Advancing multi-grained alignment for contrastive language-audio pre-training",
       "year": "2024",
-      "num_citations": 41
+      "num_citations": 42
     },
     "LHzzlAgAAAAJ:YOwf2qJgpHMC": {
       "title": "Qwen3-vl: Sharper vision, deeper thought, broader action",
@@ -171,7 +171,7 @@
     "LHzzlAgAAAAJ:Zph67rFs4hoC": {
       "title": "Qwen3-vl",
       "year": "2025",
-      "num_citations": 36
+      "num_citations": 37
     },
     "LHzzlAgAAAAJ:WF5omc3nYNoC": {
       "title": "Qwen3 technical report. arXiv preprint",
@@ -345,6 +345,5 @@
       "num_citations": 6,
       "source": "openalex"
     }
-  },
-  "last_error": "profile fetch exceeded 600s budget at 2026-10-27T10:58:45+00:00"
+  }
 }
