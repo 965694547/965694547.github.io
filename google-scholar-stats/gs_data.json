@@ -5,8 +5,8 @@
   "citedby5y": 37025,
   "name": "Zhifang Guo",
   "affiliation": "Institute of Computing Technology Chinese Academy of Sciences",
-  "updated": "2026-10-27T16:16:18+00:00",
-  "crawl_status": "ok",
+  "updated": "2026-10-27T20:52:49+00:00",
+  "crawl_status": "partial",
   "publications": {
     "LHzzlAgAAAAJ:YsMSGLbcyi4C": {
       "title": "Qwen3 technical report",
@@ -345,5 +345,6 @@
       "num_citations": 6,
       "source": "openalex"
     }
-  }
+  },
+  "last_error": "direct#2: AttributeError: 'NoneType' object has no attribute 'get'; direct#3: AttributeError: 'NoneType' object has no attribute 'get'; free-proxy#1: TypeError: Client.__init__() got an unexpected keyword argument 'proxies'; free-proxy#2: TypeError: Client.__init__() got an unexpected keyword argument 'proxies' at 2026-10-27T20:52:49+00:00"
 }
