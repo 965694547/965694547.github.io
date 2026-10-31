@@ -1,0 +1,5 @@
+[extra] Qwen3.8-Omni: Towards Native Omni-Modal Agents -> no strict match
+[extra] Qwen3.5-Omni Technical Report -> no strict match
+[openalex] Qwen3.8-Omni: Towards Native Omni-Modal Agents -> 0 citations
+[openalex] Qwen3.5-Omni Technical Report -> 6 citations
+citedby=37423 hindex=33 publications=65 extra=2 at 2026-10-31T15:58:42+00:00
