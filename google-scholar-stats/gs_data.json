@@ -1,27 +1,27 @@
 {
-  "citedby": 38046,
+  "citedby": 38084,
   "hindex": 33,
   "i10index": 44,
-  "citedby5y": 38027,
+  "citedby5y": 38065,
   "name": "Zhifang Guo",
   "affiliation": "Institute of Computing Technology Chinese Academy of Sciences",
-  "updated": "2026-11-05T02:51:27+00:00",
-  "crawl_status": "failed",
+  "updated": "2026-11-05T10:31:07+00:00",
+  "crawl_status": "ok",
   "publications": {
     "LHzzlAgAAAAJ:YsMSGLbcyi4C": {
       "title": "Qwen3 technical report",
       "year": "2025",
-      "num_citations": 16230
+      "num_citations": 16249
     },
     "LHzzlAgAAAAJ:_FxGoFyzp5QC": {
       "title": "Qwen3-vl technical report",
       "year": "2025",
-      "num_citations": 11665
+      "num_citations": 11678
     },
     "LHzzlAgAAAAJ:r0BpntZqJG4C": {
       "title": "Qwen3-omni technical report",
       "year": "2025",
-      "num_citations": 1888
+      "num_citations": 1890
     },
     "LHzzlAgAAAAJ:4DMP91E08xMC": {
       "title": "Qwen3 technical report, 2025",
@@ -66,7 +66,7 @@
     "LHzzlAgAAAAJ:isC4tDSrTZIC": {
       "title": "Qwen3-asr technical report",
       "year": "2026",
-      "num_citations": 221
+      "num_citations": 222
     },
     "LHzzlAgAAAAJ:TFP_iSt0sucC": {
       "title": "Qwen3-tts technical report",
@@ -76,7 +76,7 @@
     "LHzzlAgAAAAJ:dhFuZR0502QC": {
       "title": "Qwen3",
       "year": "2025",
-      "num_citations": 179
+      "num_citations": 181
     },
     "LHzzlAgAAAAJ:j3f4tGmQtD8C": {
       "title": "Qwen2. 5-vl",
@@ -113,14 +113,14 @@
       "year": "1",
       "num_citations": 96
     },
-    "LHzzlAgAAAAJ:HDshCWvjkbEC": {
-      "title": "Qwen3 technical report. CoRR, abs/2505.09388, 2025. doi: 10.48550",
-      "year": null,
-      "num_citations": 88
-    },
     "LHzzlAgAAAAJ:kNdYIx-mwKoC": {
       "title": "others. 2025. Qwen2. 5-omni technical report",
       "year": "1",
+      "num_citations": 87
+    },
+    "LHzzlAgAAAAJ:HDshCWvjkbEC": {
+      "title": "Qwen3 technical report. CoRR, abs/2505.09388, 2025. doi: 10.48550",
+      "year": null,
       "num_citations": 87
     },
     "LHzzlAgAAAAJ:blknAaTinKkC": {
@@ -171,12 +171,12 @@
     "LHzzlAgAAAAJ:Zph67rFs4hoC": {
       "title": "Qwen3-vl",
       "year": "2025",
-      "num_citations": 37
+      "num_citations": 38
     },
     "LHzzlAgAAAAJ:WF5omc3nYNoC": {
       "title": "Qwen3 technical report. arXiv preprint",
       "year": "2025",
-      "num_citations": 26
+      "num_citations": 27
     },
     "LHzzlAgAAAAJ:hMod-77fHWUC": {
       "title": "others. 2025c",
@@ -335,16 +335,10 @@
     }
   },
   "extra": {
-    "Qwen3.8-Omni: Towards Native Omni-Modal Agents": {
-      "title": "Qwen3.8-Omni: Towards Native Omni-Modal Agents",
-      "num_citations": 0,
-      "source": "openalex"
-    },
     "Qwen3.5-Omni Technical Report": {
-      "title": "Qwen3.5-Omni Technical Report",
-      "num_citations": 28,
-      "source": "openalex"
+      "title": "Qwen3. 5-omni technical report",
+      "num_citations": 359,
+      "source": "scholar"
     }
-  },
-  "last_error": "profile fetch exceeded 600s budget at 2026-11-05T02:51:27+00:00"
+  }
 }
