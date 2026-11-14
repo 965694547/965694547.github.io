@@ -5,7 +5,7 @@
   "citedby5y": 39164,
   "name": "Zhifang Guo",
   "affiliation": "Institute of Computing Technology Chinese Academy of Sciences",
-  "updated": "2026-11-13T18:51:04+00:00",
+  "updated": "2026-11-14T00:25:01+00:00",
   "crawl_status": "partial",
   "publications": {
     "LHzzlAgAAAAJ:YsMSGLbcyi4C": {
@@ -341,5 +341,5 @@
       "source": "openalex"
     }
   },
-  "last_error": "profile fetch exceeded 600s budget at 2026-11-13T18:51:04+00:00"
+  "last_error": "profile fetch exceeded 600s budget at 2026-11-14T00:25:01+00:00"
 }
