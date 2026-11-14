@@ -1,0 +1,4 @@
+[profile] profile fetch exceeded 600s budget
+[openalex] Qwen3.8-Omni: Towards Native Omni-Modal Agents -> 6 citations
+[openalex] Qwen3.5-Omni Technical Report -> 346 citations
+profile fetch exceeded 600s budget at 2026-11-14T14:09:16+00:00
