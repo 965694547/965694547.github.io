@@ -5,8 +5,8 @@
   "citedby5y": 39164,
   "name": "Zhifang Guo",
   "affiliation": "Institute of Computing Technology Chinese Academy of Sciences",
-  "updated": "2026-11-16T02:47:03+00:00",
-  "crawl_status": "partial",
+  "updated": "2026-11-16T10:57:18+00:00",
+  "crawl_status": "failed",
   "publications": {
     "LHzzlAgAAAAJ:YsMSGLbcyi4C": {
       "title": "Qwen3 technical report",
@@ -341,5 +341,5 @@
       "source": "openalex"
     }
   },
-  "last_error": "profile fetch exceeded 600s budget at 2026-11-16T02:47:03+00:00"
+  "last_error": "profile fetch exceeded 600s budget at 2026-11-16T10:57:18+00:00"
 }
