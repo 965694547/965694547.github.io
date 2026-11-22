@@ -5,8 +5,8 @@
   "citedby5y": 40099,
   "name": "Zhifang Guo",
   "affiliation": "Institute of Computing Technology Chinese Academy of Sciences",
-  "updated": "2026-11-22T08:46:56+00:00",
-  "crawl_status": "partial",
+  "updated": "2026-11-22T16:57:52+00:00",
+  "crawl_status": "ok",
   "publications": {
     "LHzzlAgAAAAJ:YsMSGLbcyi4C": {
       "title": "Qwen3 technical report",
@@ -332,14 +332,13 @@
   "extra": {
     "Qwen3.8-Omni: Towards Native Omni-Modal Agents": {
       "title": "Qwen3.8-Omni: Towards Native Omni-Modal Agents",
-      "num_citations": 14,
+      "num_citations": 15,
       "source": "openalex"
     },
     "Qwen3.5-Omni Technical Report": {
       "title": "Qwen3.5-Omni Technical Report",
-      "num_citations": 412,
+      "num_citations": 418,
       "source": "openalex"
     }
-  },
-  "last_error": "profile fetch exceeded 600s budget at 2026-11-22T08:46:56+00:00"
+  }
 }
