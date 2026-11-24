@@ -5,7 +5,7 @@
   "citedby5y": 40099,
   "name": "Zhifang Guo",
   "affiliation": "Institute of Computing Technology Chinese Academy of Sciences",
-  "updated": "2026-11-23T12:23:21+00:00",
+  "updated": "2026-11-24T00:23:18+00:00",
   "crawl_status": "partial",
   "publications": {
     "LHzzlAgAAAAJ:YsMSGLbcyi4C": {
@@ -337,9 +337,9 @@
     },
     "Qwen3.5-Omni Technical Report": {
       "title": "Qwen3.5-Omni Technical Report",
-      "num_citations": 418,
+      "num_citations": 424,
       "source": "openalex"
     }
   },
-  "last_error": "profile fetch exceeded 600s budget at 2026-11-23T12:23:21+00:00"
+  "last_error": "profile fetch exceeded 600s budget at 2026-11-24T00:23:18+00:00"
 }
