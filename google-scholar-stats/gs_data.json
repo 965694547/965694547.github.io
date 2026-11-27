@@ -1,82 +1,82 @@
 {
-  "citedby": 40476,
+  "citedby": 40540,
   "hindex": 32,
   "i10index": 44,
-  "citedby5y": 40459,
+  "citedby5y": 40522,
   "name": "Zhifang Guo",
   "affiliation": "Institute of Computing Technology Chinese Academy of Sciences",
-  "updated": "2026-11-26T15:47:39+00:00",
-  "crawl_status": "partial",
+  "updated": "2026-11-27T00:23:47+00:00",
+  "crawl_status": "ok",
   "publications": {
     "LHzzlAgAAAAJ:YsMSGLbcyi4C": {
       "title": "Qwen3 technical report",
       "year": "2025",
-      "num_citations": 17239
+      "num_citations": 17130
     },
     "LHzzlAgAAAAJ:_FxGoFyzp5QC": {
       "title": "Qwen3-vl technical report",
       "year": "2025",
-      "num_citations": 12919
+      "num_citations": 13035
     },
     "LHzzlAgAAAAJ:r0BpntZqJG4C": {
       "title": "Qwen3-omni technical report",
       "year": "2025",
-      "num_citations": 2054
+      "num_citations": 2064
     },
     "LHzzlAgAAAAJ:4DMP91E08xMC": {
       "title": "Qwen3 technical report, 2025",
       "year": "2025",
-      "num_citations": 1640
+      "num_citations": 1657
     },
     "LHzzlAgAAAAJ:qjMakFHDy7sC": {
       "title": "Qwen2-audio technical report",
       "year": "2024",
-      "num_citations": 1255
+      "num_citations": 1258
     },
     "LHzzlAgAAAAJ:qUcmZB5y_30C": {
       "title": "Qwen3 technical report, 2025",
       "year": "2025",
-      "num_citations": 848
+      "num_citations": 857
     },
     "LHzzlAgAAAAJ:iH-uZ7U-co4C": {
       "title": "Qwen3. 5: Towards native multimodal agents, February 2026",
       "year": "2026",
-      "num_citations": 718
+      "num_citations": 734
     },
     "LHzzlAgAAAAJ:bEWYMUwI8FkC": {
       "title": "others. 2025. Qwen3-vl technical report",
       "year": "45",
-      "num_citations": 605
+      "num_citations": 607
     },
     "LHzzlAgAAAAJ:2osOgNQ5qMEC": {
       "title": "Prompttts: Controllable text-to-speech with text descriptions",
       "year": "2023",
-      "num_citations": 296
+      "num_citations": 297
     },
     "LHzzlAgAAAAJ:Wp0gIr-vW9MC": {
       "title": "others. 2024a",
       "year": "1",
-      "num_citations": 258
+      "num_citations": 259
     },
     "LHzzlAgAAAAJ:isC4tDSrTZIC": {
       "title": "Qwen3-asr technical report",
       "year": "2026",
-      "num_citations": 250
+      "num_citations": 251
     },
     "LHzzlAgAAAAJ:TFP_iSt0sucC": {
       "title": "Qwen3-tts technical report",
       "year": "2026",
-      "num_citations": 230
+      "num_citations": 234
     },
     "LHzzlAgAAAAJ:dhFuZR0502QC": {
       "title": "Qwen3",
       "year": "2025",
-      "num_citations": 205
+      "num_citations": 204
     },
     "LHzzlAgAAAAJ:j3f4tGmQtD8C": {
       "title": "Qwen2. 5-vl",
       "year": "2025",
-      "num_citations": 182
+      "num_citations": 184
     },
     "LHzzlAgAAAAJ:hFOr9nPyWt4C": {
       "title": "Qwen3: Think deeper, act faster",
@@ -91,27 +91,22 @@
     "LHzzlAgAAAAJ:4JMBOYKVnBMC": {
       "title": "Qwen2. 5-vl, January 2025",
       "year": "2026",
-      "num_citations": 134
+      "num_citations": 135
     },
     "LHzzlAgAAAAJ:8k81kl-MbHgC": {
       "title": "Qwen2. 5-omni technical report, 2025",
       "year": "2025",
-      "num_citations": 120
+      "num_citations": 121
     },
     "LHzzlAgAAAAJ:9yKSN-GCB0IC": {
       "title": "Prompttts 2: Describing and generating voices with text prompt",
       "year": "2024",
-      "num_citations": 112
+      "num_citations": 113
     },
     "LHzzlAgAAAAJ:UebtZRa9Y70C": {
       "title": "others. 2024. Qwen2-audio technical report",
       "year": "1",
       "num_citations": 98
-    },
-    "LHzzlAgAAAAJ:blknAaTinKkC": {
-      "title": "Qwen2 technical report",
-      "year": "2024",
-      "num_citations": 90
     },
     "LHzzlAgAAAAJ:kNdYIx-mwKoC": {
       "title": "others. 2025. Qwen2. 5-omni technical report",
@@ -121,12 +116,17 @@
     "LHzzlAgAAAAJ:HDshCWvjkbEC": {
       "title": "Qwen3 technical report. CoRR, abs/2505.09388, 2025. doi: 10.48550",
       "year": null,
-      "num_citations": 87
+      "num_citations": 89
+    },
+    "LHzzlAgAAAAJ:blknAaTinKkC": {
+      "title": "Qwen2 technical report",
+      "year": "2024",
+      "num_citations": 77
     },
     "LHzzlAgAAAAJ:hC7cP41nSMkC": {
       "title": "Qwen3, April 2025",
       "year": null,
-      "num_citations": 73
+      "num_citations": 74
     },
     "LHzzlAgAAAAJ:maZDTaKrznsC": {
       "title": "Qwen2 technical report, 2024a",
@@ -176,7 +176,7 @@
     "LHzzlAgAAAAJ:WF5omc3nYNoC": {
       "title": "Qwen3 technical report. arXiv preprint",
       "year": "2025",
-      "num_citations": 28
+      "num_citations": 27
     },
     "LHzzlAgAAAAJ:Se3iqnhoufwC": {
       "title": "Qwen2 technical report. CoRR abs/2407.10671 (2024)",
@@ -340,6 +340,5 @@
       "num_citations": 431,
       "source": "openalex"
     }
-  },
-  "last_error": "profile fetch exceeded 600s budget at 2026-11-26T15:47:39+00:00"
+  }
 }
