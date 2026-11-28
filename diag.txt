@@ -1,0 +1,22 @@
+run: 46132745699 attempt: 1
+Sat Nov 28 10:06:07 UTC 2026
+--- ls google_scholar_crawler
+total 36
+drwxr-xr-x 3 runner runner  4096 Nov 28 10:06 .
+drwxr-xr-x 7 runner runner  4096 Nov 28 09:55 ..
+-rw-r--r-- 1 runner runner   243 Nov 28 10:06 crawl_output.txt
+-rw-r--r-- 1 runner runner 13301 Nov 28 09:55 main.py
+-rw-r--r-- 1 runner runner    60 Nov 28 09:55 requirements.txt
+drwxr-xr-x 2 runner runner  4096 Nov 28 10:06 results
+--- ls google_scholar_crawler/results
+total 24
+drwxr-xr-x 2 runner runner  4096 Nov 28 10:06 .
+drwxr-xr-x 3 runner runner  4096 Nov 28 10:06 ..
+-rw-r--r-- 1 runner runner 10444 Nov 28 10:06 gs_data.json
+-rw-r--r-- 1 runner runner    91 Nov 28 10:06 gs_data_shieldsio.json
+--- pip freeze (top)
+alabaster==1.0.0
+anyio==4.16.0
+arrow==1.4.0
+attrs==26.1.0
+babel==2.19.0
